@@ -1,0 +1,17 @@
+{
+    "name": "carlosalbertorodriguezlaiton/framework",
+    "authors": [
+        {
+            "name": "Carlos Rodriguez",
+            "email": "desarrollo4@omegawebsystems.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^5.2",
+        "phpunit/phpunit": "^4.8",
+        "edsdk/flmngr-server-php": "^1.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
+    }
+}

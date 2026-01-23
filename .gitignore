@@ -1,0 +1,4 @@
+node_modules/
+framework/Payment
+app/config/config.php
+vendor/
