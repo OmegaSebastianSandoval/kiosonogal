@@ -11,10 +11,10 @@
 						</div>
 						<select class="form-control" name="publicidad_seccion">
 							<option value="">Todas</option>
-							<?php foreach ($this->list_publicidad_seccion as $key => $value) : ?>
-								<option value="<?= $key; ?>" <?php if ($this->getObjectVariable($this->filters, 'publicidad_seccion') ==  $key) {
-																	echo "selected";
-																} ?>><?= $value; ?></option>
+							<?php foreach ($this->list_publicidad_seccion as $key => $value): ?>
+									<option value="<?= $key; ?>" <?php if ($this->getObjectVariable($this->filters, 'publicidad_seccion') == $key) {
+											echo "selected";
+										} ?>><?= $value; ?></option>
 							<?php endforeach ?>
 						</select>
 					</label>
@@ -25,7 +25,8 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text input-icono fondo-azul-claro "><i class="fas fa-pencil-alt"></i></span>
 						</div>
-						<input type="text" class="form-control" name="publicidad_nombre" value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_nombre') ?>"></input>
+						<input type="text" class="form-control" name="publicidad_nombre"
+							value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_nombre') ?>"></input>
 					</label>
 				</div>
 				<!-- <div class="col-2">
@@ -38,32 +39,33 @@
 					</label>
 				</div> -->
 				<!--<div class="col-2">
-		            <label>Imagen</label>
-		            <label class="input-group">
+								<label>Imagen</label>
+								<label class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text input-icono fondo-azul " ><i class="fas fa-pencil-alt"></i></span>
 							</div>
-		            <input type="text" class="form-control" name="publicidad_imagen" value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_imagen') ?>"></input>
-		            </label>
+								<input type="text" class="form-control" name="publicidad_imagen" value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_imagen') ?>"></input>
+								</label>
 				</div>
 				<div class="col-2">
-		            <label>Imagen Responsive</label>
-		            <label class="input-group">
+								<label>Imagen Responsive</label>
+								<label class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text input-icono fondo-azul " ><i class="fas fa-pencil-alt"></i></span>
 							</div>
-		            <input type="text" class="form-control" name="publicidad_imagenresponsive" value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_imagenresponsive') ?>"></input>
-		            </label>
+								<input type="text" class="form-control" name="publicidad_imagenresponsive" value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_imagenresponsive') ?>"></input>
+								</label>
 				</div>-->
-				
+
 				<div class="col-2">
-					
+
 					<label>Video</label>
 					<label class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text input-icono fondo-rojo-claro "><i class="fas fa-pencil-alt"></i></span>
 						</div>
-						<input type="text" class="form-control" name="publicidad_video" value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_video') ?>"></input>
+						<input type="text" class="form-control" name="publicidad_video"
+							value="<?php echo $this->getObjectVariable($this->filters, 'publicidad_video') ?>"></input>
 
 					</label>
 				</div>
@@ -75,10 +77,10 @@
 						</div>
 						<select class="form-control" name="publicidad_estado">
 							<option value="">Todas</option>
-							<?php foreach ($this->list_publicidad_estado as $key => $value) : ?>
-								<option value="<?= $key; ?>" <?php if ($this->getObjectVariable($this->filters, 'publicidad_estado') ==  $key) {
-																	echo "selected";
-																} ?>><?= $value; ?></option>
+							<?php foreach ($this->list_publicidad_estado as $key => $value): ?>
+									<option value="<?= $key; ?>" <?php if ($this->getObjectVariable($this->filters, 'publicidad_estado') == $key) {
+											echo "selected";
+										} ?>><?= $value; ?></option>
 							<?php endforeach ?>
 						</select>
 					</label>
@@ -89,7 +91,8 @@
 				</div>
 				<div class="col-2">
 					<label>&nbsp;</label>
-					<a class="btn btn-block btn-azul-claro " href="<?php echo $this->route; ?>?cleanfilter=1"> <i class="fas fa-eraser"></i> Limpiar Filtro</a>
+					<a class="btn btn-block btn-azul-claro " href="<?php echo $this->route; ?>?cleanfilter=1"> <i
+							class="fas fa-eraser"></i> Limpiar Filtro</a>
 				</div>
 			</div>
 		</div>
@@ -125,21 +128,22 @@
 				<div class="col-1">
 					<select class="form-control form-control-sm selectpagination">
 						<option value="20" <?php if ($this->pages == 20) {
-												echo 'selected';
-											} ?>>20</option>
+							echo 'selected';
+						} ?>>20</option>
 						<option value="30" <?php if ($this->pages == 30) {
-												echo 'selected';
-											} ?>>30</option>
+							echo 'selected';
+						} ?>>30</option>
 						<option value="50" <?php if ($this->pages == 50) {
-												echo 'selected';
-											} ?>>50</option>
+							echo 'selected';
+						} ?>>50</option>
 						<option value="100" <?php if ($this->pages == 100) {
-												echo 'selected';
-											} ?>>100</option>
+							echo 'selected';
+						} ?>>100</option>
 					</select>
 				</div>
 				<div class="col-4">
-					<div class="text-end"><a class="btn btn-sm btn-success" href="<?php echo $this->route . "\manage"; ?>"> <i class="fas fa-plus-square"></i> Crear Nuevo</a></div>
+					<div class="text-end"><a class="btn btn-sm btn-success" href="<?php echo $this->route . "\manage"; ?>"> <i
+								class="fas fa-plus-square"></i> Crear Nuevo</a></div>
 				</div>
 			</div>
 		</div>
@@ -160,62 +164,71 @@
 				</thead>
 				<tbody>
 					<?php foreach ($this->lists as $content) { ?>
-						<?php $id =  $content->publicidad_id; ?>
-						<tr>
-							<td><?= $this->list_publicidad_seccion[$content->publicidad_seccion]; ?>
-							<td><?= $content->publicidad_nombre; ?></td>
-							<td><?= $content->publicidad_fecha; ?></td>
-							<td>
-								<?php if ($content->publicidad_imagen) { ?>
-									<img src="/images/<?= $content->publicidad_imagen; ?>" class="img-thumbnail thumbnail-administrator" />
-								<?php } ?>
-								<!--<div><?= $content->publicidad_imagen; ?></div>-->
-							</td>
-							<!--<td>-->
-							<!--<?php if ($content->publicidad_imagenresponsive) { ?>
+							<?php $id = $content->publicidad_id; ?>
+							<tr>
+								<td><?= $this->list_publicidad_seccion[$content->publicidad_seccion]; ?>
+								<td><?= $content->publicidad_nombre; ?></td>
+								<td><?= $content->publicidad_fecha; ?></td>
+								<td>
+									<?php if ($content->publicidad_imagen) { ?>
+											<img src="/images/<?= $content->publicidad_imagen; ?>" class="img-thumbnail thumbnail-administrator" />
+									<?php } ?>
+									<!--<div><?= $content->publicidad_imagen; ?></div>-->
+								</td>
+								<!--<td>-->
+								<!--<?php if ($content->publicidad_imagenresponsive) { ?>
 								<img src="/images/<?= $content->publicidad_imagenresponsive; ?>"  class="img-thumbnail thumbnail-administrator" />
 							<?php } ?>-->
-							<!--<div><?= $content->publicidad_imagenresponsive; ?></div>-->
-							<!--</td>-->
-							<td>
-								<?php $content->publicidad_video = str_replace("https://www.youtube.com/watch?v=", "", $content->publicidad_video); ?>
-								<?php if ($content->publicidad_video != "") { ?>
-									<iframe class="img-thumbnail thumbnail-administrator" muted width="100" height="100" src="https://www.youtube.com/embed/<?php echo $content->publicidad_video; ?>?rel=0&amp;autoplay=0&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-								<?php } ?>
+								<!--<div><?= $content->publicidad_imagenresponsive; ?></div>-->
+								<!--</td>-->
+								<td>
+									<?php $content->publicidad_video = str_replace("https://www.youtube.com/watch?v=", "", $content->publicidad_video); ?>
+									<?php if ($content->publicidad_video != "") { ?>
+											<iframe class="img-thumbnail thumbnail-administrator" muted width="100" height="100"
+												src="https://www.youtube.com/embed/<?php echo $content->publicidad_video; ?>?rel=0&amp;autoplay=0&mute=1"
+												frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+												allowfullscreen></iframe>
+									<?php } ?>
 
 
-							</td>
-							<td><?= $this->list_publicidad_estado[$content->publicidad_estado]; ?>
-							<td>
-								<input type="hidden" id="<?= $id; ?>" value="<?= $content->orden; ?>"></input>
-								<button class="up_table btn btn-primary btn-sm"><i class="fas fa-angle-up"></i></button>
-								<button class="down_table btn btn-primary btn-sm"><i class="fas fa-angle-down"></i></button>
-							</td>
-							<td class="text-end">
-								<div>
-									<a class="btn btn-azul btn-sm" href="<?php echo $this->route; ?>/manage?id=<?= $id ?>"  data-bs-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pen-alt"></i></a>
-									<?php if ($_SESSION['kt_login_level'] == 1) { ?><span  data-bs-toggle="tooltip" data-placement="top" title="Eliminar"><a class="btn btn-rojo btn-sm"  data-bs-toggle="modal" data-bs-target="#modal<?= $id ?>"><i class="fas fa-trash-alt"></i></a></span><?php } ?>
-								</div>
-								<!-- Modal -->
-								<div class="modal fade text-left" id="modal<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="myModalLabel">Eliminar Registro</h4>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											</div>
-											<div class="modal-body">
-												<div class="">¿Esta seguro de eliminar este registro?</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-												<a class="btn btn-danger" href="<?php echo $this->route; ?>/delete?id=<?= $id ?>&csrf=<?= $this->csrf; ?><?php echo ''; ?>">Eliminar</a>
+								</td>
+								<td><?= $this->list_publicidad_estado[$content->publicidad_estado]; ?>
+								<td>
+									<input type="hidden" id="<?= $id; ?>" value="<?= $content->orden; ?>"></input>
+									<button class="up_table btn btn-primary btn-sm"><i class="fas fa-angle-up"></i></button>
+									<button class="down_table btn btn-primary btn-sm"><i class="fas fa-angle-down"></i></button>
+								</td>
+								<td class="text-end">
+									<div>
+										<a class="btn btn-azul btn-sm" href="<?php echo $this->route; ?>/manage?id=<?= $id ?>"
+											data-bs-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pen-alt"></i></a>
+										<?php if ($_SESSION['kt_login_level'] == 1) { ?><span data-bs-toggle="tooltip" data-placement="top"
+													title="Eliminar"><a class="btn btn-rojo btn-sm" data-bs-toggle="modal"
+														data-bs-target="#modal<?= $id ?>"><i class="fas fa-trash-alt"></i></a></span><?php } ?>
+									</div>
+									<!-- Modal -->
+									<div class="modal fade text-left" id="modal<?= $id ?>" tabindex="-1" role="dialog"
+										aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title" id="myModalLabel">Eliminar Registro</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+															aria-hidden="true">&times;</span></button>
+												</div>
+												<div class="modal-body">
+													<div class="">¿Esta seguro de eliminar este registro?</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+													<a class="btn btn-danger"
+														href="<?php echo $this->route; ?>/delete?id=<?= $id ?>&csrf=<?= $this->csrf; ?><?php echo ''; ?>">Eliminar</a>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</td>
-						</tr>
+								</td>
+							</tr>
 					<?php } ?>
 				</tbody>
 			</table>
@@ -231,25 +244,28 @@
 				<div class="col-1">
 					<select class="form-control form-control-sm selectpagination">
 						<option value="20" <?php if ($this->pages == 20) {
-												echo 'selected';
-											} ?>>20</option>
+							echo 'selected';
+						} ?>>20</option>
 						<option value="30" <?php if ($this->pages == 30) {
-												echo 'selected';
-											} ?>>30</option>
+							echo 'selected';
+						} ?>>30</option>
 						<option value="50" <?php if ($this->pages == 50) {
-												echo 'selected';
-											} ?>>50</option>
+							echo 'selected';
+						} ?>>50</option>
 						<option value="100" <?php if ($this->pages == 100) {
-												echo 'selected';
-											} ?>>100</option>
+							echo 'selected';
+						} ?>>100</option>
 					</select>
 				</div>
 				<div class="col-4">
-					<div class="text-end"><a class="btn btn-sm btn-success" href="<?php echo $this->route . "\manage"; ?>"> <i class="fas fa-plus-square"></i> Crear Nuevo</a></div>
+					<div class="text-end"><a class="btn btn-sm btn-success" href="<?php echo $this->route . "\manage"; ?>"> <i
+								class="fas fa-plus-square"></i> Crear Nuevo</a></div>
 				</div>
 			</div>
 		</div>
-		<input type="hidden" id="csrf" value="<?php echo $this->csrf ?>"><input type="hidden" id="order-route" value="<?php echo $this->route; ?>/order"><input type="hidden" id="page-route" value="<?php echo $this->route; ?>/changepage">
+		<input type="hidden" id="csrf" value="<?php echo $this->csrf ?>"><input type="hidden" id="order-route"
+			value="<?php echo $this->route; ?>/order"><input type="hidden" id="page-route"
+			value="<?php echo $this->route; ?>/changepage">
 	</div>
 	<div align="center">
 		<ul class="pagination justify-content-center">

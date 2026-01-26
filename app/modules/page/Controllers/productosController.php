@@ -64,5 +64,10 @@ class Page_productosController extends Page_mainController
     $this->_view->productosDestacados = $productosDestacados;
     $this->_view->securityHash = md5('totem_secret_omega' . date('Y-m-d'));
 
+
+    $publicidadController = new Administracion_Model_DbTable_Publicidad();
+    $popUpHome = $publicidadController->getList("publicidad_seccion='102' AND publicidad_estado='1'", "orden ASC")[0];
+
+    $this->_view->popup = $popUpHome;
   }
 }

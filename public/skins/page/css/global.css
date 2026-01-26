@@ -309,7 +309,7 @@ a.totem-btn::hover {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(350px, 1fr));
-  gap: 25px;
+  gap: 55px;
   margin-bottom: 30px;
 }
 
@@ -336,7 +336,7 @@ a.totem-btn::hover {
 .product-card h4 {
   font-size: 1.4em;
   font-weight: 500;
-  color: var(--rosaoscuro);
+  color: var(--grisoscuro);
   line-height: 1.4;
   text-align: center;
 }
@@ -423,13 +423,14 @@ a.totem-btn::hover {
   padding: 40px;
   max-width: 650px;
   width: 95%;
-  max-height: 90vh;
+  max-height: 100dvh;
   overflow-y: auto;
   position: relative;
   border: none;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 10px 25px rgba(0, 0, 0, 0.1);
   transform: scale(0.9);
   transition: transform 0.3s ease;
+  margin-top: 20px;
 }
 
 
@@ -574,6 +575,7 @@ a.totem-btn::hover {
   border-radius: 8px;
   transition: all 0.3s ease;
   text-decoration: none;
+  font-size: 21px;
 }
 
 .offcanvas .navbar-nav .nav-link:hover,

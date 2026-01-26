@@ -233,7 +233,7 @@
 }
 
 .detalle-carrito .titulo-product-carrito {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   color: var(--grisclaro);
   margin-bottom: 8px;
@@ -245,7 +245,7 @@
 }
 
 .detalle-carrito .item-carrito .cajax2>div {
-  font-size: 14px;
+  font-size: 16px !important;
   color: var(--grisclaro);
   margin-bottom: 5px;
 }
@@ -366,6 +366,8 @@ input.cantidad_item {
   text-align: center;
   text-decoration: none;
   box-shadow: 0 4px 15px rgba(253, 129, 38, 0.3);
+  max-width: 600px;
+  margin: auto;
 }
 
 .detalle-carrito .btn-primary-carrito:hover {

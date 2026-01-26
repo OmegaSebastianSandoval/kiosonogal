@@ -59,7 +59,7 @@ class Page_validarController extends Page_mainController
       }
 
       Session::getInstance()->set('socio', $socioData);
-      echo json_encode(['success' => true, 'message' => 'Número de carnet validado correctamente.', 'redirect' => '/page/productos']);
+      echo json_encode(['success' => true, 'message' => 'Número de carnet validado correctamente.', 'redirect' => '/page/productos?popup=1']);
     } catch (Exception $e) {
       echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
   var forms = document.querySelectorAll('form');
 
   Array.prototype.slice.call(forms).forEach(function(form) {

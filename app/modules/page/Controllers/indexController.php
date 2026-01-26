@@ -21,7 +21,8 @@ class Page_indexController extends Page_mainController
 
     $publicidadController = new Administracion_Model_DbTable_Publicidad();
     $popUpHome = $publicidadController->getList("publicidad_seccion='101' AND publicidad_estado='1'", "orden ASC")[0];
-    $this->_view->popUpHome = $popUpHome;
+
+    $this->_view->popup = $popUpHome;
     $fondoHome = $publicidadController->getList("publicidad_seccion='1' AND publicidad_estado='1'", "orden ASC")[0];
     $this->_view->fondoHome = $fondoHome;
 
