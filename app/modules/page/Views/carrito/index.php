@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center justify-content-center">
+<div class="d-flex align-items-center justify-content-center header-carrito">
     <i class="fas fa-shopping-cart icono-cart"></i>
     <h2 class="titulo-carrito">Carrito de compras</h2>
 </div>
@@ -21,12 +21,11 @@
                 </div>
                 <div class="col-5 cajax2">
                     <h4 class="titulo-product-carrito"><?php echo $producto->producto_nombre; ?></h4>
-                    <div>Unid. <span
-                            style=" font-size: 14px;font-weight: 600;">$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
+                    <div>Valor unitario. <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
                     </div>
                     <div class="precio-product-carrito">Total: <span id="valortotal<?php echo $producto->producto_id; ?>"
                             class="valortotal"
-                            style="font-size: 16px;font-weight: 700;">$<?php echo number_format($producto->producto_precio * $carrito['cantidad'], 0, ',', '.') ?></span>
+                            >$<?php echo number_format($producto->producto_precio * $carrito['cantidad'], 0, ',', '.') ?></span>
                     </div>
                 </div>
 
@@ -69,12 +68,12 @@
                     value="<?php echo $producto->producto_precio; ?>">
             </div>
         <?php } ?>
-        <div class="row justify-content-between total-carrito">
-            <div class="col-6 valor_pagar">
+        <div class="row justify-content-end total-carrito">
 
-                Valor a pagar:
-            </div>
-            <div class="col-6 text-end">
+            <div class="col-12 text-end d-flex align-items-center justify-content-end gap-2">
+                <span class="valor_pagar">
+                    TOTAL A PAGAR:
+                </span>
                 <div class="valor" id="totalpagar">$<?php echo number_format($valortotal, 0, ',', '.') ?></div>
             </div>
 
@@ -111,7 +110,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/page/pagar/cargo" method="post" id="formCarritoCargo" >
+                    <form action="/page/pagar/cargo" method="post" id="formCarritoCargo">
                         <h6>Resumen del pedido:</h6>
                         <ul>
                             <?php foreach ($this->carrito as $carrito) { ?>

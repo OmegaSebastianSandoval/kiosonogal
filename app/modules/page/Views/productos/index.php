@@ -144,10 +144,13 @@
 </div>
 
 <?php if ($this->socio && $this->socio->SBE_CODI): ?>
-  <div class="btn-carrito-flotante">
-    CONTINUAR COMPRA
-    <i class="fas fa-shopping-cart"></i>
-    <span class="badge-cantidad" style="display: none;">0</span>
+  <div class="carrito-flotante-container">
+
+    <div class="btn-carrito-flotante">
+      CONTINUAR COMPRA
+      <i class="fas fa-shopping-cart"></i>
+      <span class="badge-cantidad" style="display: none;">0</span>
+    </div>
   </div>
 
   <div class="caja-carrito">

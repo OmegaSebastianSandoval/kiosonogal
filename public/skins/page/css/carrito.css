@@ -185,7 +185,7 @@
 }
 
 /* Header del carrito */
-.detalle-carrito .d-flex.align-items-center {
+.header-carrito {
   background-color: var(--grisoscuro);
   padding: 20px;
   margin: 0;
@@ -237,11 +237,12 @@
 }
 
 .detalle-carrito .titulo-product-carrito {
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--grisclaro);
-  margin-bottom: 8px;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--grisoscuro);
   line-height: 1.3;
+  margin: 0;
+  text-transform: uppercase;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -249,14 +250,18 @@
 }
 
 .detalle-carrito .item-carrito .cajax2>div {
-  font-size: 16px !important;
-  color: var(--grisclaro);
+  font-size: 18px !important;
+  color: var(--grisoscuro);
   margin-bottom: 5px;
 }
 
+.detalle-carrito .item-carrito .cajax2>div span {
+  /* font-weight: 700; */
+}
+
 .detalle-carrito .precio-product-carrito {
-  font-weight: 400;
-  color: var(--azul) !important;
+  font-weight: 700;
+  color: var(--grisoscuro) !important;
   font-size: 16px !important;
 }
 
@@ -342,7 +347,7 @@ input.cantidad_item {
 .detalle-carrito .total-carrito .valor_pagar {
   font-size: 20px;
   font-weight: 600;
-  color: var(--grisclaro);
+  color: var(--grisoscuro);
   display: flex;
   align-items: center;
 }
@@ -603,32 +608,42 @@ input.cantidad_item {
 /* ========================================
    BOTÓN FLOTANTE DEL CARRITO
    ======================================== */
+.carrito-flotante-container {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--azul);
+  height: 100px;
+  display: grid;
+  place-items: center;
+  z-index: 10;
+}
 
 .btn-carrito-flotante {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
+
   width: fit-content;
   height: 60px;
   background: linear-gradient(135deg, var(--azul) 0%, var(--azuloscuro) 100%);
-  border-radius: 30px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(253, 129, 38, 0.4);
+  box-shadow: 0 1px 5px rgba(255, 255, 255, 0.4);
   cursor: pointer;
   z-index: 1000;
   transition: all 0.3s ease;
   border: none;
   color: #FFF;
-  padding: 0 10px;
+  padding: 0 30px;
   font-weight: 600;
   gap: 10px;
+  border: 1px solid #FFF;
+  font-size: 24px;
+  position: relative;
 }
 
 .btn-carrito-flotante:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(253, 129, 38, 0.6);
+  box-shadow: 0 6px 25px rgba(255, 255, 255, 0.6);
 }
 
 .btn-carrito-flotante i {
@@ -744,8 +759,7 @@ input.cantidad_item {
   font-size: 22px;
 }
 
-#modalCargo .btn-close {
-}
+#modalCargo .btn-close {}
 
 #modalCargo .modal-body {
   padding: 20px 0;
@@ -772,6 +786,7 @@ input.cantidad_item {
   color: var(--azul);
   font-size: 1.2em;
 }
+
 #modalCargo label {
   display: block;
   margin-bottom: 3px;
@@ -779,18 +794,21 @@ input.cantidad_item {
   color: var(--grisclaro);
 
 }
+
 #modalCargo .form-select {
   border-radius: 12px;
   border: 1px solid var(--grisclaro);
   padding: 10px;
   font-size: 16px;
 }
+
 #modalCargo .form-control {
   border-radius: 12px;
   border: 1px solid var(--grisclaro);
   padding: 10px;
   font-size: 16px;
 }
+
 #modalCargo .modal-footer {
   border-top: none;
   padding: 0;
