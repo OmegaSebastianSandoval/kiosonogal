@@ -271,7 +271,7 @@ class Administracion_usuarioController extends Administracion_mainController
 	{
 		$array = array();
 		$array['1'] = 'Administrador';
-		$array['2'] = 'Editor';
+		$array['2'] = 'Gestor';
 		return $array;
 	}
 

@@ -3,7 +3,7 @@
     <i class="fas fa-credit-card icono-cart"></i>
     <h2 class="titulo-carrito">Pagar compra</h2>
   </div>
-  <div class="container fondo-carrito">
+  <div class="container fondo-carrito compra-container">
 
     <?php $valortotal = 0; ?>
     <?php if (count($this->carrito) > 0) { ?>
@@ -13,57 +13,44 @@
         $valor = $carrito['cantidad'] * $producto->producto_precio;
         $valortotal = $valortotal + $valor;
         ?>
-        <div class="row item-carrito">
-          <div class="col-3 cajax">
-            <img src="/images/<?php echo $producto->producto_imagen; ?>" alt="<?php echo $producto->producto_nombre; ?>">
-          </div>
-          <div class="col-6 cajax2">
-            <h4 class="titulo-product-carrito"><?php echo $producto->producto_nombre; ?></h4>
-            <div>Valor unitario: <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
-            </div>
-            <div class="precio-product-carrito">Total: <span id="valortotal<?php echo $producto->producto_id; ?>"
-                class="valortotal">$<?php echo number_format($producto->producto_precio * $carrito['cantidad'], 0, ',', '.') ?></span>
-            </div>
-          </div>
-          <div class="col-3 text-end">
-            <div class="cantidad-display">Cantidad: <span>
-
-                <?php echo $carrito['cantidad']; ?> </span></div>
-          </div>
-        </div>
       <?php } ?>
-      <div class="row justify-content-end total-carrito">
+      <div class="row justify-content-start total-carrito">
 
-        <div class="col-6 text-end justify-content-end d-flex align-items-center gap-2">
+        <div class="col-6 text-end justify-content-start d-flex align-items-center gap-2 mb-3">
           <span class="valor_pagar">
             Valor a pagar:
-
           </span>
           <div class="valor" id="totalpagar">$<?php echo number_format($valortotal, 0, ',', '.') ?></div>
         </div>
 
         <div class="col-12 ">
-          <div class="mb-2">
-            <label class="form-label seleccion-metodo">Seleccione método de
-              pago</label>
-            <div class="d-grid gap-2 max-w-600">
+          <?php if ($this->socio && $this->socio->SBE_CODI && $this->socio->SBE_CUPO) { ?>
+            <div class="mb-3">
+              <label class="form-label seleccion-metodo mb-0">Seleccione método de pago</label>
+            </div>
+          <?php } ?>
 
-
-              <a href="#" class="btn btn-lg btn-primary-carrito-datafono btn-metodo"><i
-                  class="fas fa-credit-card me-2"></i>Pagar
-                con datáfono</a>
-
-              <?php if ($this->socio && $this->socio->SBE_CODI && $this->socio->SBE_CUPO) { ?>
-                <button type="button" class="btn btn-lg btn-primary-carrito btn-metodo" data-bs-toggle="modal"
-                  data-bs-target="#modalCargo">
-                  <i class="fas fa-money-bill-wave me-2"></i>Pagar con cargo a la acción
-                </button>
-              <?php } ?>
-
-
+          <div class="payment-options d-flex justify-content-center gap-3 mb-4">
+            <?php if ($this->socio && $this->socio->SBE_CODI && $this->socio->SBE_CUPO) { ?>
+              <button type="button" class="payment-card cargo" data-bs-toggle="modal" data-bs-target="#modalCargo">
+                <div class="payment-icon">
+                  <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h5 class="payment-title">Cargo a la acción</h5>
+                <p class="payment-description">Paga directamente desde tu cuenta asociada</p>
+              </button>
+            <?php } ?>
+            <div class="payment-card datafono">
+              <a href="#" class="payment-link">
+                <div class="payment-icon">
+                  <i class="fas fa-credit-card"></i>
+                </div>
+                <h5 class="payment-title">Datáfono</h5>
+                <p class="payment-description">Pago con tarjeta física</p>
+              </a>
             </div>
           </div>
-          <a href="/page/productos" class="btn btn-sm btn-seguir btn-outline-secondary">
+          <a href="/page/productos" class="btn btn-sm btn-seguir btn-outline-secondary max-w-100">
             <i class="fas fa-shopping-bag me-2"></i>Seguir comprando
           </a>
         </div>
@@ -88,9 +75,12 @@
                 <?php foreach ($this->carrito as $carrito) { ?>
                   <li class="resumen-item">
                     <span class="producto-nombre"><?php echo $carrito['detalle']->producto_nombre; ?></span>
-                    <span class="producto-cantidad">(Cant: <?php echo $carrito['cantidad']; ?>)</span>
-                    <span
-                      class="producto-precio">$<?php echo number_format($carrito['cantidad'] * $carrito['detalle']->producto_precio, 0, ',', '.'); ?></span>
+                    <div class="d-flex justify-content-end align-items-center gap-3 ">
+
+                      <span class="producto-cantidad">(Cant: <?php echo $carrito['cantidad']; ?>)</span>
+                      <span
+                        class="producto-precio">$<?php echo number_format($carrito['cantidad'] * $carrito['detalle']->producto_precio, 0, ',', '.'); ?></span>
+                    </div>
                   </li>
                 <?php } ?>
               </ul>
@@ -113,10 +103,10 @@
                 <input type="number" id="lugar" name="lugar" class="form-control" min="1" max="16" required>
               </div>
               <div id="errorMessages" class="alert alert-danger mt-3" style="display:none;"></div>
-              <div class="modal-footer d-flex gap-3 ">
-                <button type="submit" class="btn btn-primary-carrito  ">Aceptar y Pagar</button>
-                <button type="button" class="btn btn-secondary btn-metodo " data-bs-dismiss="modal">Cancelar</button>
+              <div class="modal-footer d-flex gap-3" >
 
+                <button type="button" class="totem-btn totem-btn-secondary m-0" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="totem-btn totem-btn-primary  m-0">Aceptar y Pagar</button>
 
               </div>
             </form>

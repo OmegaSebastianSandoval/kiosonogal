@@ -3,7 +3,7 @@
     <div class="col-12">
       <h2>
         <span>Módulo</span><br>
-        <span>CALENDARIO</span><br>
+        <span>ADMINISTRADOR</span><br>
         <span>BIENVENIDOS</span>
       </h2>
     </div>

@@ -1,9 +1,6 @@
-<div class="d-flex align-items-center justify-content-center header-carrito">
-    <i class="fas fa-shopping-cart icono-cart"></i>
-    <h2 class="titulo-carrito">Carrito de compras</h2>
-</div>
+
 <?php $valortotal = 0; ?>
-<div class="container fondo-carrito">
+<div class=" fondo-carrito">
 
     <?php if (count($this->carrito) > 0) { ?>
         <?php foreach ($this->carrito as $key => $carrito) { ?>
@@ -14,7 +11,7 @@
             $valortotal = $valortotal + $valor;
 
             ?>
-            <div class="row item-carrito">
+            <div class="row item-carrito g-0 ">
                 <div class="col-3 cajax">
                     <img src="/images/<?php echo $producto->producto_imagen; ?>"
                         alt="<?php echo $producto->producto_nombre; ?>">
@@ -76,7 +73,7 @@
                 <div class="valor" id="totalpagar">$<?php echo number_format($valortotal, 0, ',', '.') ?></div>
             </div>
 
-            <div class="col-12 mt-3">
+            <div class="col-12">
                 <div class="pagar">
                     <a href="/page/compra" class="btn btn-sm btn-primary-carrito">
                         <i class="fas fa-credit-card me-2"></i>Ir a pagar

@@ -58,7 +58,7 @@ class Page_carritoController extends Page_mainController
 
 	public function additemAction()
 	{
-
+		if (!Session::getInstance()->get("socio")) return;
 		$this->setLayout("blanco");
 		$id = $this->_getSanitizedParam("producto");
 		$cantidad = $this->_getSanitizedParam("cantidad");

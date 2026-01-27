@@ -60,7 +60,9 @@
 
 <body>
   <header>
-    <?= $this->_data['header']; ?>
+    <?php
+    //  echo $this->_data['header']; 
+     ?>
   </header>
   <main class="main-general"><?= $this->_content ?></main>
   <footer>

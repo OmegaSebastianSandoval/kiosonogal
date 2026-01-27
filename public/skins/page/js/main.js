@@ -115,7 +115,7 @@ $(document).ready(function () {
       .then((response) => response.text())
       .then((data) => {
         mostrarNotificacion("Producto agregado al carrito", "success");
-        traercarrito();
+        // traercarrito();
         actualizarContadorCarrito();
       })
       .catch((error) => {
@@ -183,14 +183,24 @@ $(document).ready(function () {
           parseInt(item.querySelector(".cantidad_item").value) || 0;
         totalItems += cantidad;
       });
+      let totalPrice = "$0";
+      const totalElement = doc.querySelector("#totalpagar");
+      if (totalElement) {
+        totalPrice = totalElement.textContent.trim();
+      }
       $(".badge-cantidad").text(totalItems);
       if (totalItems > 0) {
         $(".badge-cantidad").show();
       } else {
         $(".badge-cantidad").hide();
       }
+      $(".order-count").text(totalItems + " Productos seleccionados");
+      $(".view-order-button span:last-child").text(totalPrice);
     }).fail(function () {
       console.error("Error al actualizar contador");
+      $(".order-count").text("0 Productos seleccionados");
+      $(".view-order-button span:last-child").text("$0");
+      $(".badge-cantidad").hide();
     });
   }
 
@@ -214,6 +224,14 @@ $(document).ready(function () {
   // Abrir carrito con icono del header
   $(document).on("click", ".btn-carrito-header", function () {
     mostrarCarrito();
+  });
+
+  // Abrir carrito con View Order button
+  $(document).on("click", ".view-order-button", function () {
+    $.get("/page/carrito", function (data) {
+      $("#carrito-modal .modal-body").html(data);
+      $("#carrito-modal").modal("show");
+    });
   });
 
   // Cerrar carrito

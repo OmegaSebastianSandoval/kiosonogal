@@ -8,6 +8,10 @@ class Page_resumenController extends Page_mainController
 {
   public function indexAction()
   {
+    if(!Session::getInstance()->get('socio')){
+      header("Location: /?error=no_auth");
+      exit;
+    }
     $pedidoId = $_GET['pedido'] ?? null;
     if (!$pedidoId) {
       // Redirigir o mostrar error si no hay pedido
@@ -21,7 +25,11 @@ class Page_resumenController extends Page_mainController
       header("Location: /page/productos?error=pedido_no_encontrado");
       exit;
     }
-
+    $socioActual = Session::getInstance()->get('socio');
+    if ($pedido->pedido_documento != $socioActual->SBE_CODI) {
+      header("Location: /page/productos?error=acceso_denegado");
+      exit;
+    }
     $pedidosProductosModel = new Administracion_Model_DbTable_Pedidoproductos();
     $productos = $pedidosProductosModel->getList("pedido_producto_pedido = {$pedidoId}");
 

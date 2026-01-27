@@ -60,14 +60,11 @@ class Page_productosController extends Page_mainController
 
     $categoriaId = $this->_getSanitizedParam('categoria');
     $subCategoriaId = $this->_getSanitizedParam('subcategoria');
-    $categoriaInfo = $categoriasModel->getById($categoriaId);
-    if ($categoriaInfo) {
+    if ($categoriaId) {
 
-      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' ", 'producto_destacado DESC, producto_nuevo DESC, producto_nombre ASC');
+      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' ", 'producto_nuevo DESC, producto_nombre ASC');
 
       $this->_view->selectedCategoryId = (int) $categoriaId;
-      $this->_view->categoriaInfo = $categoriaInfo;
-
     }
     if ($subCategoriaId) {
       $productos = $productosModel->getList("producto_estado = 1 AND producto_subcategoria = '{$subCategoriaId}' ", 'producto_nuevo DESC, producto_nombre ASC');
@@ -75,6 +72,9 @@ class Page_productosController extends Page_mainController
     }
 
 
+    $productosNormales = [];
+    $productosDestacados = [];
+    $productosTodos = [];
     foreach ($productos as $producto) {
       if (
         empty($producto->producto_imagen) ||
@@ -85,11 +85,15 @@ class Page_productosController extends Page_mainController
 
       $producto->producto_precio = $producto->producto_precio + ($producto->producto_precio * ($porcentajeImpuesto / 100));
 
-
+      if ((int) $producto->producto_destacado === 1) {
+        $productosDestacados[] = $producto;
+      } else {
+        $productosNormales[] = $producto;
+      }
     }
 
-    $this->_view->productos = $productos;
-    $this->_view->carrito = $this->getCarrito();
+    $this->_view->productosNormales = $productosNormales;
+    $this->_view->productosDestacados = $productosDestacados;
     $this->_view->securityHash = md5('totem_secret_omega' . date('Y-m-d'));
 
 
@@ -97,14 +101,5 @@ class Page_productosController extends Page_mainController
     $popUpHome = $publicidadController->getList("publicidad_seccion='102' AND publicidad_estado='1'", "orden ASC")[0];
 
     $this->_view->popup = $popUpHome;
-  }
-
-  public function getCarrito()
-  {
-    if (Session::getInstance()->get("carrito")) {
-      return Session::getInstance()->get("carrito");
-    } else {
-      return [];
-    }
   }
 }
