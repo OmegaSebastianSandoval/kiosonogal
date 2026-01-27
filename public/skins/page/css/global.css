@@ -416,12 +416,16 @@ body.dark .nav-icon {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 /* Header */
 .header {
   padding: 1rem 2rem 1rem 2rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10;
 }
 
 .header-content {
@@ -448,6 +452,10 @@ body.dark .nav-icon {
 
 body.dark .header-title {
   color: white;
+}
+
+body.dark .header {
+  background-color: #102216;
 }
 
 .filter-button {
@@ -486,8 +494,7 @@ body.dark .filter-button {
 /* Grid Container */
 .grid-container {
   flex: 1;
-  overflow-y: auto;
-  padding: 1rem 1.5rem 8rem 1.5rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
 }
 
 .product-grid {
@@ -631,16 +638,23 @@ body.dark .add-button {
 
 /* Checkout Bar */
 .checkout-bar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 0;
+  left: 6rem;
   right: 0;
   padding: 1.5rem;
   background: linear-gradient(to top, #f6f8f6, rgba(246, 248, 246, 0.95), transparent);
+  z-index: 20;
 }
 
 body.dark .checkout-bar {
   background: linear-gradient(to top, #102216, rgba(16, 34, 22, 0.95), transparent);
+}
+
+@media (min-width: 768px) {
+  .checkout-bar {
+    left: 8rem;
+  }
 }
 
 .checkout-content {

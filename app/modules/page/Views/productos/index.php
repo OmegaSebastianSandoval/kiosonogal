@@ -15,7 +15,7 @@
           <div class="nav-icon">
             <span class="material-symbols-outlined"><i class="fa-solid fa-bowl-food"></i></span>
           </div>
-          <span class="nav-label"><?php echo htmlspecialchars($categoria->categoria_nombre); ?></span>
+          <span class="nav-label"><?php echo ($categoria->categoria_nombre); ?></span>
         </a>
       <?php endforeach; ?>
 
@@ -59,7 +59,7 @@
       </div>
     <?php else: ?>
       <div class="container-info">
-        <h4>Hola, <span><?php echo htmlspecialchars($this->socio->sbe_nomb . " " . $this->socio->sbe_apel); ?></span></h4>
+        <h4>Hola, <span><?php echo ($this->socio->sbe_nomb . " " . $this->socio->sbe_apel); ?></span></h4>
       </div>
     <?php endif; ?>
 
@@ -69,7 +69,7 @@
         <div>
           <p class="header-subtitle">Nuestra selección</p>
           <h2 class="header-title">
-            <?php echo $this->categoriaInfo ? htmlspecialchars($this->categoriaInfo->categoria_nombre) : "Todos los productos"; ?>
+            <?php echo $this->categoriaInfo ? ($this->categoriaInfo->categoria_nombre) : "Todos los productos"; ?>
           </h2>
         </div>
         <button class="filter-button">
@@ -87,7 +87,7 @@
           <div class="product-card">
             <div class="product-image-container">
               <div class="product-image"
-                style="background-image: url('/images/<?php echo htmlspecialchars($producto->producto_imagen); ?>');"
+                style="background-image: url('/images/<?php echo ($producto->producto_imagen); ?>');"
                 type="button" data-bs-toggle="modal" data-bs-target="#modal-<?php echo (int) $producto->producto_id; ?>">
               </div>
               <button type="button" data-bs-toggle="modal"
@@ -96,7 +96,7 @@
               </button>
             </div>
             <div class="product-content">
-              <h3 class="product-title"><?php echo htmlspecialchars($producto->producto_nombre); ?></h3>
+              <h3 class="product-title"><?php echo ($producto->producto_nombre); ?></h3>
               <div class="product-description"><?php echo ($producto->producto_descripcion); ?></div>
               <div class="product-footer">
                 <span class="product-price">$<?php echo number_format((float) $producto->producto_precio, 0); ?></span>
@@ -121,9 +121,9 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pt-0">
-                  <img src="/images/<?php echo htmlspecialchars($producto->producto_imagen); ?>"
-                    alt="<?php echo htmlspecialchars($producto->producto_nombre); ?>">
-                  <h3><?php echo htmlspecialchars($producto->producto_nombre); ?></h3>
+                  <img src="/images/<?php echo ($producto->producto_imagen); ?>"
+                    alt="<?php echo ($producto->producto_nombre); ?>">
+                  <h3><?php echo ($producto->producto_nombre); ?></h3>
                   <div><?php echo ($producto->producto_descripcion); ?></div>
                   <div class="d-flex justify-content-between align-items-center mt-3">
 
@@ -136,7 +136,7 @@
 
                   </div>
                   <!-- <p class="code">Código: <?php
-                  // echo htmlspecialchars($producto->producto_codigo); 
+                  // echo ($producto->producto_codigo); 
                   ?></p> -->
                 </div>
 
