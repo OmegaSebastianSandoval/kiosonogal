@@ -41,6 +41,7 @@
           <div class="product-info">
 
             <h4><?php echo htmlspecialchars($producto->producto_nombre); ?></h4>
+            <h5>$<?php echo number_format((float) $producto->producto_precio); ?></h5>
             <?php if ($this->socio && $this->socio->SBE_CODI): ?>
               <button type="button" class="totem-btn totem-btn-primary w-100 btn-agregar-carrito"
                 data-producto="<?php echo (int) $producto->producto_id; ?>" data-cantidad="1">AGREGAR</button>
@@ -60,12 +61,12 @@
         <!-- MODAL -->
         <div id="modal-<?php echo (int) $producto->producto_id; ?>" class="product-modal">
           <div class="modal-content">
-            <a href="#" class="close">&times;</a>
+            <a href="#close" class="close">&times;</a>
 
             <img src="/images/<?php echo htmlspecialchars($producto->producto_imagen); ?>"
               alt="<?php echo htmlspecialchars($producto->producto_nombre); ?>">
             <h3><?php echo htmlspecialchars($producto->producto_nombre); ?></h3>
-             <div><?php echo ($producto->producto_descripcion); ?></div>
+            <div><?php echo ($producto->producto_descripcion); ?></div>
             <p class="price">$<?php echo number_format((float) $producto->producto_precio); ?></p>
             <p class="code">Código: <?php echo htmlspecialchars($producto->producto_codigo); ?></p>
 
@@ -111,7 +112,7 @@
         <!-- MODAL -->
         <div id="modal-<?php echo (int) $producto->producto_id; ?>" class="product-modal">
           <div class="modal-content">
-            <a href="#" class="close">&times;</a>
+            <a href="#close" class="close">&times;</a>
 
             <img src="/images/<?php echo htmlspecialchars($producto->producto_imagen); ?>"
               alt="<?php echo htmlspecialchars($producto->producto_nombre); ?>">
@@ -130,16 +131,21 @@
       <?php endforeach; ?>
     </div>
   <?php else: ?>
-    <div class="container-info">
-      <h4>No hay productos disponibles en esta categoría.</h4>
-    </div>
+    <?php if ($_GET['categoria'] == '') { ?>
+      <div class="container-info">
+        <div class="alert alert-warning">
+          <i class="fas fa-exclamation-triangle"></i>
+          No hay productos disponibles en esta categoría.
+        </div>
+      </div>
+    <?php } ?>
   <?php endif; ?>
 
 </div>
 
 <?php if ($this->socio && $this->socio->SBE_CODI): ?>
   <div class="btn-carrito-flotante">
-  
+    CONTINUAR COMPRA
     <i class="fas fa-shopping-cart"></i>
     <span class="badge-cantidad" style="display: none;">0</span>
   </div>

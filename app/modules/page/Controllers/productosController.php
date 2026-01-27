@@ -31,12 +31,12 @@ class Page_productosController extends Page_mainController
     $subCategoriaId = $this->_getSanitizedParam('subcategoria');
     if ($categoriaId) {
 
-      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' ", 'producto_nombre ASC');
+      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' ", 'producto_nuevo DESC, producto_nombre ASC');
 
       $this->_view->selectedCategoryId = (int) $categoriaId;
     }
     if ($subCategoriaId) {
-      $productos = $productosModel->getList("producto_estado = 1 AND producto_subcategoria = '{$subCategoriaId}' ", 'producto_nombre ASC');
+      $productos = $productosModel->getList("producto_estado = 1 AND producto_subcategoria = '{$subCategoriaId}' ", 'producto_nuevo DESC, producto_nombre ASC');
       $this->_view->selectedCategoryId = (int) $categoriaId;
     }
 
