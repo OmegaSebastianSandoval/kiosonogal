@@ -749,17 +749,22 @@ input.cantidad_item {
 
 #modalCargo .modal-header {
   border-bottom: none;
-  padding: 0;
+  padding: 10px;
+  color: #FFF;
+  background-color: var(--azul);
 }
 
 
 #modalCargo .modal-title {
-  color: var(--grisoscuro);
+  color: #FFF;
+
   font-weight: 600;
   font-size: 22px;
 }
 
-#modalCargo .btn-close {}
+#modalCargo .btn-close {
+  filter: invert(1);
+}
 
 #modalCargo .modal-body {
   padding: 20px 0;
@@ -769,22 +774,73 @@ input.cantidad_item {
   color: var(--azuloscuro);
   font-weight: 600;
   margin-bottom: 15px;
+  font-size: 20px;
 }
 
 #modalCargo .modal-body ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+}
+#modalCargo .modal-body p {
+  text-align: end;
+  margin-bottom: 5px;
 }
 
 #modalCargo .modal-body li {
-  padding: 8px 0;
+  list-style: none;
+  padding: 0;
+}
+
+#modalCargo .resumen-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
   border-bottom: 1px solid var(--grisclaro2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 249, 250, 0.8) 100%);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+#modalCargo .resumen-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#modalCargo .producto-nombre {
+  font-weight: 600;
+  color: var(--grisoscuro);
+  flex: 1;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#modalCargo .producto-cantidad {
   color: var(--grisclaro);
+  font-size: 16px;
+  background: rgba(122, 122, 122, 0.1);
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin: 0 10px;
+}
+
+#modalCargo .producto-precio {
+  font-weight: 700;
+  color: var(--azul);
+  font-size: 18px;
+  background: linear-gradient(135deg, var(--azul) 0%, var(--azuloscuro) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 #modalCargo .modal-body p strong {
   color: var(--azul);
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 
 #modalCargo label {
@@ -799,14 +855,14 @@ input.cantidad_item {
   border-radius: 12px;
   border: 1px solid var(--grisclaro);
   padding: 10px;
-  font-size: 16px;
+  font-size: 19px;
 }
 
 #modalCargo .form-control {
   border-radius: 12px;
   border: 1px solid var(--grisclaro);
   padding: 10px;
-  font-size: 16px;
+  font-size: 19px;
 }
 
 #modalCargo .modal-footer {
@@ -822,6 +878,8 @@ input.cantidad_item {
   border-radius: 25px;
   padding: 10px 20px;
   font-weight: 600;
+  max-width: 600px;
+  margin: auto;
 }
 
 #modalCargo .btn-secondary:hover {

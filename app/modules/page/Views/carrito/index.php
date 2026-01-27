@@ -21,11 +21,10 @@
                 </div>
                 <div class="col-5 cajax2">
                     <h4 class="titulo-product-carrito"><?php echo $producto->producto_nombre; ?></h4>
-                    <div>Valor unitario. <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
+                    <div>Valor unitario: <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
                     </div>
                     <div class="precio-product-carrito">Total: <span id="valortotal<?php echo $producto->producto_id; ?>"
-                            class="valortotal"
-                            >$<?php echo number_format($producto->producto_precio * $carrito['cantidad'], 0, ',', '.') ?></span>
+                            class="valortotal">$<?php echo number_format($producto->producto_precio * $carrito['cantidad'], 0, ',', '.') ?></span>
                     </div>
                 </div>
 
@@ -79,70 +78,15 @@
 
             <div class="col-12 mt-3">
                 <div class="pagar">
-                    <a href="#" class="btn btn-sm btn-primary-carrito-datafono">
-                        <i class="fas fa-credit-card me-2"></i>Pagar con datáfono
+                    <a href="/page/compra" class="btn btn-sm btn-primary-carrito">
+                        <i class="fas fa-credit-card me-2"></i>Ir a pagar
                     </a>
                 </div>
-                <?php if ($this->socio && $this->socio->SBE_CODI && $this->socio->SBE_CUPO) { ?>
-                    <div class="pagar">
-                        <button type="button" class="btn btn-sm btn-primary-carrito" data-bs-toggle="modal"
-                            data-bs-target="#modalCargo">
-                            <i class="fas fa-money-bill-wave me-2"></i>Pagar con cargo a la acción
-                        </button>
-                    </div>
-                <?php } ?>
 
                 <div class="pagar">
                     <a class="btn btn-sm btn-primary-carrito-seguir pointer" onclick="cerrarCarrito();">
                         <i class="fas fa-shopping-bag me-2"></i>Seguir comprando
                     </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalCargo" tabindex="-1" aria-labelledby="modalCargoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCargoLabel">Confirmar pago con cargo a la acción</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/page/pagar/cargo" method="post" id="formCarritoCargo">
-                        <h6>Resumen del pedido:</h6>
-                        <ul>
-                            <?php foreach ($this->carrito as $carrito) { ?>
-                                <li><?php echo $carrito['detalle']->producto_nombre; ?> (Cant:
-                                    <?php echo $carrito['cantidad']; ?>)
-                                    -
-                                    $<?php echo number_format($carrito['cantidad'] * $carrito['detalle']->producto_precio, 0, ',', '.'); ?>
-                                </li>
-                            <?php } ?>
-                        </ul>
-                        <p><strong>Total: $<?php echo number_format($valortotal, 0, ',', '.'); ?></strong></p>
-                        <div class="mb-3">
-                            <label for="cuotas">Selecciona el número de cuotas:</label>
-                            <select id="cuotas" name="cuotas" class="form-select" required>
-                                <option value="">Selecciona...</option>
-                                <option value="1">1 cuota</option>
-                                <option value="2">2 cuotas</option>
-                                <option value="3">3 cuotas</option>
-                                <option value="4">4 cuotas</option>
-                                <option value="5">5 cuotas</option>
-                                <option value="6">6 cuotas</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lugar">Selecciona el lugar:</label>
-                            <input type="number" id="lugar" name="lugar" class="form-control" min="1" max="20" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary-carrito">Aceptar y Pagar</button>
-                            <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

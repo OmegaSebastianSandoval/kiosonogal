@@ -93,6 +93,8 @@ class Page_pagarController extends Page_mainController
       $pedidosProductosModel->insert($dataProducto);
     }
 
+    $this->descontarProductosInventario($productosCarrito);
+
     // Limpiar carrito
     Session::getInstance()->set("carrito", []);
     header("Location: /page/resumen?pedido={$pedidoId}");
@@ -138,4 +140,20 @@ class Page_pagarController extends Page_mainController
 
 
   }
+
+  public function descontarProductosInventario($productosCarrito)
+  {
+    $productoModel = new Administracion_Model_DbTable_Productos();
+    foreach ($productosCarrito as $id => $productoCarrito) {
+      $productoInfo = $productoModel->getById($id);
+      if ($productoInfo) {
+        $nuevaCantidad = $productoInfo->producto_cantidad - (int) $productoCarrito['cantidad'];
+        if ($nuevaCantidad < 0) {
+          $nuevaCantidad = 0;
+        }
+        $productoModel->editField($id, 'producto_cantidad', $nuevaCantidad);
+      }
+    }
+  }
+
 }
