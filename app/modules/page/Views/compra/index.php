@@ -106,7 +106,7 @@
 
               <div class="mb-3">
                 <label for="lugar">Selecciona el lugar en el que se encuentra (1 a 16):</label>
-                <input type="number" id="lugar" name="lugar" class="form-control" min="1" max="16" required>
+                <input type="number" id="lugar" name="lugar" class="keyboard-input form-control" min="1" max="16" required data-kioskboard-type="numpad">
               </div>
               <div id="errorMessages" class="alert alert-danger mt-3" style="display:none;"></div>
               <div class="modal-footer d-flex gap-3">

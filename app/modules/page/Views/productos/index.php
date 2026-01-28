@@ -48,8 +48,8 @@
           <div class="form-group">
             <label for="numeroCarnet" class="form-label">Número de carnet</label>
             <div class="input-button-container">
-              <input type="number" class="form-control login-input" id="numeroCarnet" name="numeroCarnet"
-                placeholder="Ej. 12345678">
+              <input type="number" class="keyboard-input form-control login-input" id="numeroCarnet" name="numeroCarnet"
+                placeholder="Ej. 12345678" data-kioskboard-type="numpad">
               <button class="totem-btn totem-btn-primary submit-btn" type="submit"><i
                   class="fa fa-arrow-right"></i></button>
             </div>

@@ -21,6 +21,8 @@
 
   <!-- FontAwesome -->
   <link rel="stylesheet" href="/components/Font-Awesome/css/all.css">
+  <!-- KioskBoard CSS -->
+  <link rel="stylesheet" href="/components/keyboard/kioskboard-2.3.0.min.css">
 
   <link rel="shortcut icon" href="/images/<?= $infopage->info_pagina_favicon; ?>">
 
@@ -30,6 +32,8 @@
 
   <!-- Jquery -->
   <script src="/components/jquery/jquery-3.6.0.min.js"></script>
+  <!-- KioskBoard JS -->
+  <script src="/components/keyboard/kioskboard-2.3.0.min.js"></script>
 
   <!-- Bootstrap Js -->
   <script src="/components/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -62,7 +66,7 @@
   <header>
     <?php
     //  echo $this->_data['header']; 
-     ?>
+    ?>
   </header>
   <main class="main-general"><?= $this->_content ?></main>
   <footer>
@@ -71,7 +75,6 @@
   <?= $this->_data['adicionales']; ?>
   <?php if ($this->_data['ocultarcarrito'] != 1) { ?>
     <!-- <div id="micarrito"></div> -->
-   
   <?php } ?>
 </body>
 
