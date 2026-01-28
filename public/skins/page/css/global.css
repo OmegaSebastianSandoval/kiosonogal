@@ -494,7 +494,7 @@ body.dark .filter-button {
 /* Grid Container */
 .grid-container {
   flex: 1;
-  padding: 1rem 1.5rem 1rem 1.5rem;
+  padding: 1rem 1.5rem 10rem 1.5rem;
 }
 
 .product-grid {
@@ -992,6 +992,11 @@ body.dark .modal-content {
   color: #374151;
 }
 
+#totalpagar {
+  font-size: 2rem;
+
+}
+
 .valor {
   font-weight: 800;
   color: var(--azul);
@@ -1000,6 +1005,24 @@ body.dark .modal-content {
   text-align: center;
 }
 
+.valor_subtotal,
+.valor_impuestos {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gris);
+}
+
+.subtotal,
+.impuestos {
+  font-weight: 600;
+  color: var(--gris);
+  font-size: 1.4rem;
+  letter-spacing: -0.025em;
+  text-align: center;
+}
+.valor_subtotal,.valor_impuestos{
+  color: var(--grisoscuro);
+}
 .pagar {
   margin-top: 1rem;
 }
@@ -1723,9 +1746,11 @@ body.dark .modal-content {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.dropdown-menu li{
+
+.dropdown-menu li {
   margin-bottom: 0.5rem;
 }
+
 .dropdown-item {
   padding: 0.875rem 1.25rem;
   border-radius: 0.75rem;

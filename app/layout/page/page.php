@@ -70,7 +70,7 @@
   </footer>
   <?= $this->_data['adicionales']; ?>
   <?php if ($this->_data['ocultarcarrito'] != 1) { ?>
-    <div id="micarrito"></div>
+    <!-- <div id="micarrito"></div> -->
    
   <?php } ?>
 </body>

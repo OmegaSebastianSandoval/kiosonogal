@@ -1,4 +1,3 @@
-<?php $valortotal = 0; ?>
 <div class=" fondo-carrito">
 
     <?php if (count($this->carrito) > 0) { ?>
@@ -6,8 +5,6 @@
             <?php
 
             $producto = $carrito['detalle'];
-            $valor = $carrito['cantidad'] * $producto->producto_precio;
-            $valortotal = $valortotal + $valor;
 
             ?>
             <div class="row item-carrito g-0 ">
@@ -17,7 +14,8 @@
                 </div>
                 <div class="col-5 cajax2">
                     <h4 class="titulo-product-carrito"><?php echo $producto->producto_nombre; ?></h4>
-                    <div class="precio-unitario">Valor unitario: <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
+                    <div class="precio-unitario">Valor unitario:
+                        <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
                     </div>
                     <div class="precio-product-carrito">Total: <span id="valortotal<?php echo $producto->producto_id; ?>"
                             class="valortotal">$<?php echo number_format($producto->producto_precio * $carrito['cantidad'], 0, ',', '.') ?></span>
@@ -64,12 +62,23 @@
             </div>
         <?php } ?>
         <div class="row justify-content-end total-carrito">
-
+            <div class="col-12 text-end d-flex align-items-center justify-content-end gap-2">
+                <span class="valor_subtotal">
+                    Subtotal:
+                </span>
+                <div class="subtotal" id="subtotal">$<?php echo number_format($this->subtotal, 0, ',', '.') ?></div>
+            </div>
+            <div class="col-12 text-end d-flex align-items-center justify-content-end gap-2">
+                <span class="valor_impuestos">
+                    Impuestos:
+                </span>
+                <div class="impuestos" id="impuestos">$<?php echo number_format($this->impuestos, 0, ',', '.') ?></div>
+            </div>
             <div class="col-12 text-end d-flex align-items-center justify-content-end gap-2">
                 <span class="valor_pagar">
                     TOTAL A PAGAR:
                 </span>
-                <div class="valor" id="totalpagar">$<?php echo number_format($valortotal, 0, ',', '.') ?></div>
+                <div class="valor" id="totalpagar">$<?php echo number_format($this->total, 0, ',', '.') ?></div>
             </div>
 
             <div class="col-12">

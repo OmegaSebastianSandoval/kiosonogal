@@ -36,15 +36,28 @@ class Page_carritoController extends Page_mainController
 			if (empty($productoInfo->producto_imagen) || !file_exists(PUBLIC_PATH . '/images/' . $productoInfo->producto_imagen)) {
 				$productoInfo->producto_imagen = 'product.gif';
 			}
+			$base_precio = $productoInfo->producto_precio;
 			$productoInfo->producto_precio = $productoInfo->producto_precio + ($productoInfo->producto_precio * ($porcentajeImpuesto / 100));
 
 
 			$data[$id] = [];
 			$data[$id]['detalle'] = $productoInfo;
 			$data[$id]['cantidad'] = (int) $cantidad;
+			$data[$id]['base_precio'] = $base_precio;
 
 		}
+
+		$subtotal = 0;
+		foreach ($data as $item) {
+			$subtotal += $item['cantidad'] * $item['base_precio'];
+		}
+		$taxes = $subtotal * ($porcentajeImpuesto / 100);
+		$total = $subtotal + $taxes;
+
 		$this->_view->carrito = $data;
+		$this->_view->subtotal = $subtotal;
+		$this->_view->impuestos = $taxes;
+		$this->_view->total = $total;
 	}
 
 	public function getCarrito()

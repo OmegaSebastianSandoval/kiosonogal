@@ -126,7 +126,7 @@ $(document).ready(function () {
       .then((response) => response.text())
       .then((data) => {
         mostrarNotificacion("Producto agregado al carrito", "success");
-        // traercarrito();
+         traercarrito();
         actualizarContadorCarrito();
       })
       .catch((error) => {
