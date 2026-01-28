@@ -4,8 +4,8 @@
     <div class="card shadow-lg border-0 rounded-4 p-0">
       <div class="card-header bg-gradient-primary text-white text-center rounded-top-4">
         <img src="/skins/page/images/logo.webp" alt="Logo" class="logo-resumen mb-3" style="max-width: 120px;">
-        <h3 class="mb-0">Resumen del pedido</h3>
-        <p class="mb-0">Pedido #<?php echo $this->pedido->pedido_id; ?></p>
+        <h3 class="mb-0 resumen-text">Resumen del pedido</h3>
+        <p class="mb-0 pedido-numero">Pedido #<?php echo $this->pedido->pedido_id; ?></p>
       </div>
       <div class="card-body p-4">
         <!-- Contador de redirección -->
@@ -123,16 +123,16 @@
     // Mostrar el mensaje
     redirectMessage.style.display = 'block';
 
-    const interval = setInterval(() => {
-      countdown--;
+    // const interval = setInterval(() => {
+    //   countdown--;
 
-      countdownText.textContent = `Volviendo al inicio en ${countdown} segundos`;
+    //   countdownText.textContent = `Volviendo al inicio en ${countdown} segundos`;
 
-      if (countdown <= 0) {
-        clearInterval(interval);
-        window.location.href = '/page/index/logout';
-      }
-    }, 1000);
+    //   if (countdown <= 0) {
+    //     clearInterval(interval);
+    //     window.location.href = '/page/index/logout';
+    //   }
+    // }, 1000);
   });
 
 </script>
@@ -143,5 +143,10 @@
   }
   .min-h-auto{
     min-height: auto !important;
+  }
+  .contenedor-resumen{
+    height: 100dvh;
+    display: grid;
+    place-items: center;
   }
 </style>

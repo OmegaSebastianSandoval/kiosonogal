@@ -58,7 +58,8 @@ class Page_carritoController extends Page_mainController
 
 	public function additemAction()
 	{
-		if (!Session::getInstance()->get("socio")) return;
+		if (!Session::getInstance()->get("socio"))
+			return;
 		$this->setLayout("blanco");
 		$id = $this->_getSanitizedParam("producto");
 		$cantidad = $this->_getSanitizedParam("cantidad");
@@ -133,5 +134,46 @@ class Page_carritoController extends Page_mainController
 		$data['log_log'] = print_r($array, true);
 		$data['log_fecha'] = date("Y-m-d H:i:s");
 		$logcarritoModel->insert($data);
+	}
+
+	public function getCarritoJsonAction()
+	{
+		$this->setLayout("blanco");
+		header('Content-Type: application/json');
+
+		$productoModel = new Administracion_Model_DbTable_Productos();
+		$carrito = $this->getCarrito();
+		$impuestosModel = new Administracion_Model_DbTable_Impuestos();
+
+		$impuestos = $impuestosModel->getList('impuesto_estado = 1', 'impuesto_nombre ASC');
+
+		$porcentajeImpuesto = 0;
+		if (is_countable($impuestos) && count($impuestos) > 0) {
+			foreach ($impuestos as $impuesto) {
+				$porcentajeImpuesto += $impuesto->impuesto_porcentaje;
+			}
+		}
+
+		$data = [];
+		foreach ($carrito as $id => $cantidad) {
+			$productoInfo = $productoModel->getById($id);
+			if (!$productoInfo) {
+				continue;
+			}
+			if (empty($productoInfo->producto_imagen) || !file_exists(PUBLIC_PATH . '/images/' . $productoInfo->producto_imagen)) {
+				$productoInfo->producto_imagen = 'product.gif';
+			}
+			$productoInfo->producto_precio = $productoInfo->producto_precio + ($productoInfo->producto_precio * ($porcentajeImpuesto / 100));
+
+			$data[] = [
+				'id' => $productoInfo->producto_id,
+				'nombre' => $productoInfo->producto_nombre,
+				'imagen' => $productoInfo->producto_imagen,
+				'precio' => $productoInfo->producto_precio,
+				'cantidad' => (int) $cantidad
+			];
+		}
+
+		echo json_encode($data);
 	}
 }

@@ -1,4 +1,3 @@
-
 <?php $valortotal = 0; ?>
 <div class=" fondo-carrito">
 
@@ -18,7 +17,7 @@
                 </div>
                 <div class="col-5 cajax2">
                     <h4 class="titulo-product-carrito"><?php echo $producto->producto_nombre; ?></h4>
-                    <div>Valor unitario: <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
+                    <div class="precio-unitario">Valor unitario: <span>$<?php echo number_format($producto->producto_precio, 0, ',', '.'); ?></span>
                     </div>
                     <div class="precio-product-carrito">Total: <span id="valortotal<?php echo $producto->producto_id; ?>"
                             class="valortotal">$<?php echo number_format($producto->producto_precio * $carrito['cantidad'], 0, ',', '.') ?></span>
@@ -91,14 +90,14 @@
 
 <?php } else { ?>
     <div class="logo-alert" align="center">
-        <img src="/skins/page/images/logo.webp" alt="Logo Nogal" class="logo-header w-100">
+        <img src="/skins/page/images/logo.webp" alt="Logo Nogal" class="logo-carrito w-100">
     </div>
     <div class="mensaje-alert alert" align="center">
-        <i class="fas fa-shopping-cart" style="font-size: 24px; margin-bottom: 10px;"></i>
+        <i class="fas fa-shopping-cart"></i>
         <p>No hay productos en tu carrito</p>
-        <p style="font-size: 14px; ">¡Explora nuestro menú y agrega tus favoritos!</p>
+        <p>¡Explora nuestro menú y agrega tus favoritos!</p>
     </div>
-    <div class="pagar px-3">
+    <div class="pagar">
         <a class="btn btn-sm btn-primary-carrito-seguir pointer" onclick="cerrarCarrito();">
             <i class="fas fa-shopping-bag me-2"></i>Ver menú
         </a>

@@ -56,23 +56,49 @@ class Page_productosController extends Page_mainController
 
 
 
-    $productos = $productosModel->getList('producto_estado = 1', 'producto_nombre ASC');
+    $productos = $productosModel->getList('producto_estado = 1', 'producto_destacado DESC, producto_nuevo DESC, producto_nombre ASC');
 
     $categoriaId = $this->_getSanitizedParam('categoria');
     $subCategoriaId = $this->_getSanitizedParam('subcategoria');
+    $ordenParam = $this->_getSanitizedParam('orden') ?: 'destacado';
+
+    // Definir orden basado en parámetro
+    switch ($ordenParam) {
+      case 'nombre_asc':
+        $orden = 'producto_nombre ASC';
+        break;
+      case 'nombre_desc':
+        $orden = 'producto_nombre DESC';
+        break;
+      case 'precio_asc':
+        $orden = 'CAST(producto_precio AS DECIMAL(10,2)) ASC';
+        break;
+      case 'precio_desc':
+        $orden = 'CAST(producto_precio AS DECIMAL(10,2)) DESC';
+        break;
+      case 'destacado':
+      default:
+        $orden = 'producto_destacado DESC, producto_nuevo DESC, producto_nombre ASC';
+        break;
+    }
+
     $categoriaInfo = $categoriasModel->getById($categoriaId);
     if ($categoriaInfo) {
-
-      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' ", 'producto_destacado DESC, producto_nuevo DESC, producto_nombre ASC');
-
+      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' ", $orden);
       $this->_view->selectedCategoryId = (int) $categoriaId;
       $this->_view->categoriaInfo = $categoriaInfo;
-
     }
     if ($subCategoriaId) {
-      $productos = $productosModel->getList("producto_estado = 1 AND producto_subcategoria = '{$subCategoriaId}' ", 'producto_nuevo DESC, producto_nombre ASC');
+      $productos = $productosModel->getList("producto_estado = 1 AND producto_subcategoria = '{$subCategoriaId}' ", $orden);
       $this->_view->selectedCategoryId = (int) $categoriaId;
     }
+
+    // Si no hay categoria ni subcategoria, aplicar orden a todos
+    if (!$categoriaId && !$subCategoriaId) {
+      $productos = $productosModel->getList('producto_estado = 1', $orden);
+    }
+
+    $this->_view->selectedOrden = $ordenParam;
 
 
     foreach ($productos as $producto) {
@@ -91,6 +117,20 @@ class Page_productosController extends Page_mainController
     $this->_view->productos = $productos;
     $this->_view->carrito = $this->getCarrito();
     $this->_view->securityHash = md5('totem_secret_omega' . date('Y-m-d'));
+
+    // Obtener productos del carrito para thumbnails
+    $carrito = $this->getCarrito();
+    $carritoProductos = [];
+    foreach ($carrito as $id => $cantidad) {
+      $productoInfo = $productosModel->getById($id);
+      if ($productoInfo) {
+        if (empty($productoInfo->producto_imagen) || !file_exists(PUBLIC_PATH . '/images/' . $productoInfo->producto_imagen)) {
+          $productoInfo->producto_imagen = 'product.gif';
+        }
+        $carritoProductos[] = $productoInfo;
+      }
+    }
+    $this->_view->carritoProductos = $carritoProductos;
 
 
     $publicidadController = new Administracion_Model_DbTable_Publicidad();

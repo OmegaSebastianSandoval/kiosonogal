@@ -49,7 +49,7 @@
             <label for="numeroCarnet" class="form-label">Número de carnet</label>
             <div class="input-button-container">
               <input type="number" class="form-control login-input" id="numeroCarnet" name="numeroCarnet"
-                placeholder="Ej. 12345678" required>
+                placeholder="Ej. 12345678">
               <button class="totem-btn totem-btn-primary submit-btn" type="submit"><i
                   class="fa fa-arrow-right"></i></button>
             </div>
@@ -72,10 +72,30 @@
             <?php echo $this->categoriaInfo ? ($this->categoriaInfo->categoria_nombre) : "Todos los productos"; ?>
           </h2>
         </div>
-        <button class="filter-button">
-          <span class="material-symbols-outlined"><i class="fa-solid fa-filter"></i></span>
-          <span>Filtro</span>
-        </button>
+        <div class="dropdown">
+          <button class="filter-button dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <span class="material-symbols-outlined"><i class="fa-solid fa-filter"></i></span>
+            <span>Filtro</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a
+                class="dropdown-item filter-option <?php echo ($this->selectedOrden == 'destacado') ? 'active' : ''; ?>"
+                href="#" data-orden="destacado">Destacados primero</a></li>
+            <li><a
+                class="dropdown-item filter-option <?php echo ($this->selectedOrden == 'nombre_asc') ? 'active' : ''; ?>"
+                href="#" data-orden="nombre_asc">Nombre A-Z</a></li>
+            <li><a
+                class="dropdown-item filter-option <?php echo ($this->selectedOrden == 'nombre_desc') ? 'active' : ''; ?>"
+                href="#" data-orden="nombre_desc">Nombre Z-A</a></li>
+            <li><a
+                class="dropdown-item filter-option <?php echo ($this->selectedOrden == 'precio_asc') ? 'active' : ''; ?>"
+                href="#" data-orden="precio_asc">Precio menor a mayor</a></li>
+            <li><a
+                class="dropdown-item filter-option <?php echo ($this->selectedOrden == 'precio_desc') ? 'active' : ''; ?>"
+                href="#" data-orden="precio_desc">Precio mayor a menor</a></li>
+          </ul>
+        </div>
       </div>
     </header>
 
@@ -87,8 +107,8 @@
           <div class="product-card">
             <div class="product-image-container">
               <div class="product-image"
-                style="background-image: url('/images/<?php echo ($producto->producto_imagen); ?>');"
-                type="button" data-bs-toggle="modal" data-bs-target="#modal-<?php echo (int) $producto->producto_id; ?>">
+                style="background-image: url('/images/<?php echo ($producto->producto_imagen); ?>');" type="button"
+                data-bs-toggle="modal" data-bs-target="#modal-<?php echo (int) $producto->producto_id; ?>">
               </div>
               <button type="button" data-bs-toggle="modal"
                 data-bs-target="#modal-<?php echo (int) $producto->producto_id; ?>" class="info-icon">
@@ -103,6 +123,7 @@
                 <?php if ($this->socio && $this->socio->SBE_CODI): ?>
                   <button class="add-button btn-agregar-carrito" data-producto="<?php echo (int) $producto->producto_id; ?>"
                     data-cantidad="1">
+                    Agregar
                     <span class="material-symbols-outlined"><i class="fa-solid fa-plus"></i></span>
                   </button>
                 <?php endif; ?>
@@ -153,10 +174,8 @@
       <!-- Sticky Bottom Checkout Bar -->
       <div class="checkout-bar">
         <div class="checkout-content">
-          <div class="order-thumbnails">
-            <div class="thumbnail"
-              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBA3TFkB66oiBsseR1H_CwJfHMcxWILc1yJb3-gZBlgX6dnspmM_uRzIxDb8NjRBZNpeVeYbA_EngATiUv-8QB57R8NVYRAhuitNU5rFyOB3T0WnVVCfO-wIV-d5qsfbv-gxisrQheU19WEdihEQYwoaOadiMWH8EyrDWislEGqn7XfncUw2KvyMyAuDZv3UL7CshnH09cshS2Z01EAnyFvoiQR4mpCEJR6plVABrRog70HSwhGCoB74kyqF_EhSUnxdmdFr1Sp7rk');">
-            </div>
+          <div class="order-thumbnails" style="display: none;">
+            <div class="thumbnail"></div>
             <div class="thumbnail-count"></div>
           </div>
           <div class="order-info">
@@ -179,7 +198,7 @@
   <!-- Modal Carrito -->
   <div class="modal fade modal-carrito" id="carrito-modal" tabindex="-1" role="dialog" aria-labelledby="carritoModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="carritoModalLabel"><i class="fas fa-shopping-cart icono-cart"></i> Carrito de
@@ -200,5 +219,16 @@
     if (productGrid && productGrid.children.length === 2) {
       productGrid.classList.add('single');
     }
+
+    // Manejar clicks en las opciones de filtro
+    document.querySelectorAll('.filter-option').forEach(function (element) {
+      element.addEventListener('click', function (e) {
+        e.preventDefault();
+        const orden = this.getAttribute('data-orden');
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('orden', orden);
+        window.location.href = window.location.pathname + '?' + urlParams.toString();
+      });
+    });
   });
 </script>

@@ -58,6 +58,17 @@ $(document).ready(function () {
   // Manejar el envío del formulario del modal
   $("#formCarnet").on("submit", function (e) {
     e.preventDefault();
+    const numeroCarnet = $("#numeroCarnet").val().trim();
+    if (!numeroCarnet) {
+      Swal.fire({
+        icon: "error",
+        title: "Campo requerido",
+        text: "Por favor, ingresa tu número de carnet.",
+        confirmButtonText: "Cerrar",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
     const formData = new FormData(this);
 
     fetch("/page/validar", {
@@ -196,12 +207,42 @@ $(document).ready(function () {
       }
       $(".order-count").text(totalItems + " Productos seleccionados");
       $(".view-order-button span:last-child").text(totalPrice);
+
+      // Actualizar thumbnails
+      $.getJSON("/page/carrito/getCarritoJson", function (productos) {
+        actualizarThumbnails(productos);
+      }).fail(function () {
+        actualizarThumbnails([]);
+      });
     }).fail(function () {
       console.error("Error al actualizar contador");
       $(".order-count").text("0 Productos seleccionados");
       $(".view-order-button span:last-child").text("$0");
       $(".badge-cantidad").hide();
+      actualizarThumbnails([]);
     });
+  }
+
+  // Función para actualizar thumbnails
+  function actualizarThumbnails(productos) {
+    const thumbnailsContainer = $(".order-thumbnails");
+    if (productos.length === 0) {
+      thumbnailsContainer.hide();
+      return;
+    }
+    thumbnailsContainer.show();
+    const firstProduct = productos[0];
+    $(".thumbnail").css(
+      "background-image",
+      `url('/images/${firstProduct.imagen}')`,
+    );
+    if (productos.length === 1) {
+      $(".thumbnail-count").hide();
+    } else {
+      $(".thumbnail-count")
+        .text(`+${productos.length - 1}`)
+        .show();
+    }
   }
 
   // Mostrar notificación
@@ -286,6 +327,12 @@ $(document).ready(function () {
       .then((data) => {
         traercarrito(0);
         actualizarContadorCarrito();
+        // Actualizar modal si está abierto
+        if ($("#carrito-modal").hasClass("show")) {
+          $.get("/page/carrito", function (data) {
+            $("#carrito-modal .modal-body").html(data);
+          });
+        }
         mostrarNotificacion("Producto eliminado del carrito", "success");
       })
       .catch((error) => {
@@ -308,6 +355,12 @@ $(document).ready(function () {
       .then((data) => {
         traercarrito(0);
         actualizarContadorCarrito();
+        // Actualizar modal si está abierto
+        if ($("#carrito-modal").hasClass("show")) {
+          $.get("/page/carrito", function (data) {
+            $("#carrito-modal .modal-body").html(data);
+          });
+        }
       })
       .catch((error) => {
         console.error("Error al cambiar cantidad:", error);

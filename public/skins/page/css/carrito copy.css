@@ -1017,9 +1017,11 @@ input.cantidad_item {
   line-height: 1.4;
   margin: 0;
 }
+
 .max-w-100 {
   max-width: 100%;
 }
+
 /* Responsive para las cards de pago */
 @media (max-width: 768px) {
   /* .payment-options {
