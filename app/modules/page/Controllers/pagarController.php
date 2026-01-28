@@ -73,6 +73,7 @@ class Page_pagarController extends Page_mainController
 
     $data = $this->getDataCompraCargo();
     $data['pedido_valorpagar'] = $totalConImpuestos;
+    $data['pedido_kiosko'] = isset($_COOKIE['kiosk_id']) ? $_COOKIE['kiosk_id'] : 1;
     $pedidoId = $pedidosModel->insert($data);
     if (!$pedidoId) {
       header("Location: /page/productos?error=pedido");

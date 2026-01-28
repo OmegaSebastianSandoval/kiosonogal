@@ -24,7 +24,8 @@
   <!-- Global CSS -->
   <link rel="stylesheet" href="/skins/administracion/css/global.css">
   <link rel="shortcut icon" href="/images/<?= $infopage->info_pagina_favicon; ?>">
-
+  <!-- SweetAlert -->
+  <script src="/components/sweetalert/sweetalert2@11.js"></script>
   <script type="text/javascript">
     var map;
     var longitude = 0;

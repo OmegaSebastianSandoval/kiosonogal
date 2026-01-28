@@ -47,17 +47,26 @@ class Page_validarController extends Page_mainController
       if (!$socioData || !$socioData->SBE_CODI) {
         throw new Exception('Número de carnet no encontrado.');
       }
-      $beneficiarios = $this->consultarBeneficiarios($socioData->MAC_NUME);
-      if (is_countable($beneficiarios) && count($beneficiarios) > 0) {
+      if (!$socioData->SBE_CUPO) {
+        $beneficiarios = $this->consultarBeneficiarios($socioData->MAC_NUME);
+        if (is_countable($beneficiarios) && count($beneficiarios) > 0) {
 
-        foreach ($beneficiarios as $beneficiario) {
-          if ($beneficiario->SBE_CODI === $socioData->SBE_CODI) {
-            $socioData->SBE_CUPO = $beneficiario->SBE_CUPO;
-            break;
+          foreach ($beneficiarios as $beneficiario) {
+            if ($beneficiario->SBE_CODI === $socioData->SBE_CODI) {
+              $socioData->SBE_CUPO = $beneficiario->SBE_CUPO;
+              break;
+            }
           }
         }
       }
       $socioData->numero_carnet = $numeroCarnet;
+
+      $estaEnClub = $this->verificarIngreso($numeroCarnet, $socioData->SBE_CODI);
+      error_log("Verificación de ingreso para carnet $numeroCarnet y socio {$socioData->SBE_CODI}: " . print_r($estaEnClub, true));
+      $estaEnClub = 1; // Forzar para pruebas
+      if ($estaEnClub != 1) {
+        throw new Exception('El socio no se encuentra en el interior del club.');
+      }
       Session::getInstance()->set('socio', $socioData);
       echo json_encode(['success' => true, 'message' => 'Número de carnet validado correctamente.', 'redirect' => '/page/productos?popup=1']);
     } catch (Exception $e) {

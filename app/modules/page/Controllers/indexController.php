@@ -9,6 +9,10 @@ class Page_indexController extends Page_mainController
 
   public function indexAction()
   {
+    if (!isset($_COOKIE['kiosk_id'])) {
+      header("Location: /page/activacion");
+      return;
+    }
     $socio = Session::getInstance()->get('socio');
 
     if ($socio && $socio->SBE_CODI) {

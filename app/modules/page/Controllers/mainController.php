@@ -103,9 +103,9 @@ class Page_mainController extends Controllers_Abstract
 	{
 		$loginServiceUrl = 'https://ev.clubelnogal.com/tokens/querys/consultar_token.php';
 
-		// Datos a enviar al servicio externo
+
 		$postData = http_build_query([
-			'inputUsername' => 'webnogal', //tken que recibe de la base de
+			'inputUsername' => 'webnogal',
 			'inputPassword' => 'nogal2023*'
 		]);
 
@@ -125,36 +125,65 @@ class Page_mainController extends Controllers_Abstract
 		$response = json_decode($response);
 		return $response->token;
 	}
-	 public function consultarBeneficiarios($mac_nume)
-  {
+	public function consultarBeneficiarios($mac_nume)
+	{
 
-    // $codi = Session::getInstance()->get('codi');
-    // $ncar = Session::getInstance()->get('ncar');
 
-    $loginServiceUrl = URL_WS . '/querys/selectBeneficiarios.php';
 
-    // Datos a enviar al servicio externo
-    $postData = http_build_query([
-      'token' => $this->generarToken(), //tken que recibe de la base de
-      'mac_nume' => $mac_nume
-    ]);
+		$loginServiceUrl = URL_WS . '/querys/selectBeneficiarios.php';
 
-    $ch = curl_init($loginServiceUrl);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    $response = curl_exec($ch);
-    $response = json_decode($response);
+		$postData = http_build_query([
+			'token' => $this->generarToken(),
+			'mac_nume' => $mac_nume
+		]);
 
-    if (curl_errno($ch)) {
-      echo 'Error cURL: ' . curl_error($ch);
-      exit;
-    }
+		$ch = curl_init($loginServiceUrl);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    curl_close($ch);
+		$response = curl_exec($ch);
+		$response = json_decode($response);
 
-    return $response;
-  }
+		if (curl_errno($ch)) {
+			echo 'Error cURL: ' . curl_error($ch);
+			exit;
+		}
 
+		curl_close($ch);
+
+		return $response;
+	}
+	public function verificarIngreso($ncar, $codi)
+	{
+
+
+
+		$loginServiceUrl = URL_WS . '/querys/verificarIngreso.php';
+
+
+		$postData = http_build_query([
+			'token' => $this->generarToken(),
+			'ncar' => $ncar,
+			'codi' => $codi
+		]);
+
+		$ch = curl_init($loginServiceUrl);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		$response = curl_exec($ch);
+		$response = json_decode($response);
+
+		if (curl_errno($ch)) {
+			echo 'Error cURL: ' . curl_error($ch);
+			exit;
+		}
+
+		curl_close($ch);
+
+		return $response;
+	}
 }
