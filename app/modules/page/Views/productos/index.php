@@ -13,7 +13,14 @@
         <a href="/page/productos?categoria=<?php echo $categoria->categoria_id; ?>"
           class="nav-button <?php echo $categoria->categoria_id == $this->selectedCategoryId ? 'active' : ''; ?> ">
           <div class="nav-icon">
-            <span class="material-symbols-outlined"><i class="fa-solid fa-bowl-food"></i></span>
+            <span class="material-symbols-outlined">
+              <?php if ($categoria->categoria_icono):
+                echo $categoria->categoria_icono;
+                ?>
+              <?php else: ?>
+                <i class="fa-solid fa-bowl-food"></i>
+              <?php endif ?>
+            </span>
           </div>
           <span class="nav-label"><?php echo ($categoria->categoria_nombre); ?></span>
         </a>
@@ -49,7 +56,7 @@
             <form id="formCarnet" class="login-form">
               <input type="hidden" name="hash" value="<?php echo $this->_view->securityHash; ?>">
               <div class="form-group">
-                <label for="numeroCarnet" class="form-label">Número de carnet</label>
+                <label for="numeroCarnet" class="form-label">N&uacute;mero de carnet</label>
                 <div class="input-button-container">
                   <input type="number" class="keyboard-input form-control login-input" id="numeroCarnet"
                     name="numeroCarnet" placeholder="Ej. 12345678" data-kioskboard-type="numpad">
@@ -69,7 +76,7 @@
 
         <div class="header-content">
           <div>
-            <p class="header-subtitle">Nuestra selección</p>
+            <p class="header-subtitle">Nuestra selecci&oacute;n</p>
             <h2 class="header-title">
               <?php echo $this->categoriaInfo ? ($this->categoriaInfo->categoria_nombre) : "Todos los productos"; ?>
             </h2>
@@ -77,10 +84,11 @@
 
         </div>
       </div>
-      <img src="/skins/page/images/logo-hd.png" alt="Logo club el nogal" style="height: 100px;" class="">
+
       <div class="h-100 d-flex flex-column justify-content-between align-items-end gap-3">
-        <!-- <div class="d-flex align-items-center gap-2 h-100" >
-        </div> -->
+        <div class="d-flex align-items-center gap-2 h-100"> <img src="/skins/page/images/logo-hd.png"
+            alt="Logo club el nogal" style="height: 68px;" class="">
+        </div>
         <div class="dropdown mt-auto">
           <button class="filter-button dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -124,6 +132,9 @@
                 data-bs-target="#modal-<?php echo (int) $producto->producto_id; ?>" class="info-icon">
                 <span class="material-symbols-outlined"><i class="fa-solid fa-circle-info"></i></span>
               </button>
+              <?php if ($producto->producto_nuevo): ?>
+                <div class="new-badge">Nuevo</div>
+              <?php endif ?>
             </div>
             <div class="product-content">
               <h3 class="product-title"><?php echo ($producto->producto_nombre); ?></h3>
@@ -168,7 +179,7 @@
                         <i class="fas fa-info-circle"></i>
                         <span class="fs-6">
 
-                          Para agregar productos al carrito, por favor inicia sesión. </span>
+                          Para agregar productos al carrito, por favor inicia sesi&oacute;n. </span>
                       </div>
 
                     <?php endif; ?>

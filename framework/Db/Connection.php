@@ -24,6 +24,7 @@ final class Db_Connection
     {
         if (null == $this->_conn) {
             $this->_conn = new mysqli($this->_host, $this->_user, $this->_password, $this->_dbname, $this->_port);
+            $this->_conn->set_charset("utf8");
             if ($this->_conn->connect_error) {
                 throw new Exception('Could not connect to database');
             }

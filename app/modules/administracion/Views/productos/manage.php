@@ -9,7 +9,11 @@
 				<input type="hidden" name="id" id="id" value="<?= $this->content->producto_id; ?>" />
 			<?php } ?>
 			<div class="row">
-
+				<div class="col-12">
+					<div class="alert alert-warning">
+						<strong>Nota:</strong> El precio debe ir sin comas, ni puntos, ni s&iacute;mbolos de moneda.
+					</div>
+				</div>
 				<div class="col-2 form-group d-grid">
 
 					<label class="control-label">Activo</label>
@@ -99,7 +103,7 @@
 					</label>
 					<div class="help-block with-errors"></div>
 				</div>
-				<div class="col-3 form-group">
+				<!-- <div class="col-3 form-group">
 					<label class="control-label">Subcategoria</label>
 					<label class="input-group">
 						<div class="input-group-prepend">
@@ -115,9 +119,9 @@
 						</select>
 					</label>
 					<div class="help-block with-errors"></div>
-				</div>
+				</div> -->
 
-				<div class="col-3 form-group">
+				<!-- <div class="col-3 form-group">
 					<label for="producto_codigo" class="control-label">C&oacute;digo</label>
 					<label class="input-group">
 						<div class="input-group-prepend">
@@ -138,7 +142,7 @@
 							id="producto_cantidad_minima" class="form-control">
 					</label>
 					<div class="help-block with-errors"></div>
-				</div>
+				</div> -->
 				<div class="col-3 form-group">
 					<label for="producto_limite_pedido" class="control-label">L&iacute;mite pedido</label>
 					<label class="input-group">

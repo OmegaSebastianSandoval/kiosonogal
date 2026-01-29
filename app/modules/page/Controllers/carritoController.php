@@ -37,7 +37,7 @@ class Page_carritoController extends Page_mainController
 				$productoInfo->producto_imagen = 'product.gif';
 			}
 			$base_precio = $productoInfo->producto_precio;
-			$productoInfo->producto_precio = $productoInfo->producto_precio + ($productoInfo->producto_precio * ($porcentajeImpuesto / 100));
+			// $productoInfo->producto_precio = $productoInfo->producto_precio + ($productoInfo->producto_precio * ($porcentajeImpuesto / 100));
 
 
 			$data[$id] = [];
@@ -52,7 +52,9 @@ class Page_carritoController extends Page_mainController
 			$subtotal += $item['cantidad'] * $item['base_precio'];
 		}
 		$taxes = $subtotal * ($porcentajeImpuesto / 100);
-		$total = $subtotal + $taxes;
+		$total = $subtotal;
+
+		$subtotal = $subtotal - $taxes;
 
 		$this->_view->carrito = $data;
 		$this->_view->subtotal = $subtotal;
@@ -74,9 +76,22 @@ class Page_carritoController extends Page_mainController
 		if (!Session::getInstance()->get("socio"))
 			return;
 		$this->setLayout("blanco");
+		header('Content-Type: application/json');
 		$id = $this->_getSanitizedParam("producto");
 		$cantidad = $this->_getSanitizedParam("cantidad");
+		$productoModel = new Administracion_Model_DbTable_Productos();
+		$productoInfo = $productoModel->getById($id);
+		if (!$productoInfo) {
+			echo json_encode(['success' => false, 'message' => 'Producto no encontrado.']);
+			return;
+		}
+		$limite = $productoInfo->producto_limite_pedido ?? 0;
 		$carrito = $this->getCarrito();
+		$nuevaCantidad = ($carrito[$id] ?? 0) + $cantidad;
+		if ($limite > 0 && $nuevaCantidad > $limite) {
+			echo json_encode(['success' => false, 'message' => 'No se puede agregar más de ' . $limite . ' unidades de este producto.']);
+			return;
+		}
 		if ($carrito[$id]) {
 			$carrito[$id] = $carrito[$id] + $cantidad;
 		} else {
@@ -95,7 +110,7 @@ class Page_carritoController extends Page_mainController
 		$data['log_log'] = print_r($array, true);
 		$data['log_fecha'] = date("Y-m-d H:i:s");
 		$logcarritoModel->insert($data);
-
+		echo json_encode(['success' => true]);
 
 	}
 
@@ -128,8 +143,20 @@ class Page_carritoController extends Page_mainController
 	public function changecantidadAction()
 	{
 		$this->setLayout("blanco");
+		header('Content-Type: application/json');
 		$id = $this->_getSanitizedParam("producto");
 		$cantidad = $this->_getSanitizedParam("cantidad");
+		$productoModel = new Administracion_Model_DbTable_Productos();
+		$productoInfo = $productoModel->getById($id);
+		if (!$productoInfo) {
+			echo json_encode(['success' => false, 'message' => 'Producto no encontrado.']);
+			return;
+		}
+		$limite = $productoInfo->producto_limite_pedido ?? 0;
+		if ($limite > 0 && $cantidad > $limite) {
+			echo json_encode(['success' => false, 'message' => 'No se puede establecer más de ' . $limite . ' unidades de este producto.']);
+			return;
+		}
 		$carrito = $this->getCarrito();
 		if ($carrito[$id]) {
 			$carrito[$id] = $cantidad;
@@ -147,6 +174,7 @@ class Page_carritoController extends Page_mainController
 		$data['log_log'] = print_r($array, true);
 		$data['log_fecha'] = date("Y-m-d H:i:s");
 		$logcarritoModel->insert($data);
+		echo json_encode(['success' => true]);
 	}
 
 	public function getCarritoJsonAction()

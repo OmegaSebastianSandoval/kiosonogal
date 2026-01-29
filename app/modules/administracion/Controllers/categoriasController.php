@@ -251,6 +251,7 @@ class Administracion_categoriasController extends Administracion_mainController
 		} else {
 			$data['categoria_estado'] = $this->_getSanitizedParam("categoria_estado");
 		}
+		$data['categoria_icono'] = $this->_getSanitizedParamHtml("categoria_icono");
 		return $data;
 	}
 

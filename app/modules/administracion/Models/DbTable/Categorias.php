@@ -27,7 +27,8 @@ class Administracion_Model_DbTable_Categorias extends Db_Table
 		$categoria_descripcion = $data['categoria_descripcion'];
 		$categoria_padre = $data['categoria_padre'];
 		$categoria_estado = $data['categoria_estado'];
-		$query = "INSERT INTO categorias( categoria_nombre, categoria_imagen, categoria_descripcion, categoria_padre, categoria_estado) VALUES ( '$categoria_nombre', '$categoria_imagen', '$categoria_descripcion', '$categoria_padre', '$categoria_estado')";
+		$categoria_icono = $data['categoria_icono'];
+		$query = "INSERT INTO categorias( categoria_nombre, categoria_imagen, categoria_descripcion, categoria_padre, categoria_estado, categoria_icono) VALUES ( '$categoria_nombre', '$categoria_imagen', '$categoria_descripcion', '$categoria_padre', '$categoria_estado', '$categoria_icono')";
 		$res = $this->_conn->query($query);
         return mysqli_insert_id($this->_conn->getConnection());
 	}
@@ -45,7 +46,8 @@ class Administracion_Model_DbTable_Categorias extends Db_Table
 		$categoria_descripcion = $data['categoria_descripcion'];
 		$categoria_padre = $data['categoria_padre'];
 		$categoria_estado = $data['categoria_estado'];
-		$query = "UPDATE categorias SET  categoria_nombre = '$categoria_nombre', categoria_imagen = '$categoria_imagen', categoria_descripcion = '$categoria_descripcion', categoria_padre = '$categoria_padre', categoria_estado = '$categoria_estado' WHERE categoria_id = '".$id."'";
+		$categoria_icono = $data['categoria_icono'];
+		$query = "UPDATE categorias SET  categoria_nombre = '$categoria_nombre', categoria_imagen = '$categoria_imagen', categoria_descripcion = '$categoria_descripcion', categoria_padre = '$categoria_padre', categoria_estado = '$categoria_estado', categoria_icono = '$categoria_icono' WHERE categoria_id = '".$id."'";
 		$res = $this->_conn->query($query);
 	}
 }

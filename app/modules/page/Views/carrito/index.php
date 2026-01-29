@@ -22,15 +22,6 @@
                     </div>
                 </div>
 
-                <?php
-                $max = 20;
-                if ($producto->producto_cantidad < $max) {
-                    $max = $producto->producto_cantidad;
-                }
-                if ($producto->producto_limite_pedido != "" and $producto->producto_limite_pedido < $max) {
-                    $max = $producto->producto_limite_pedido;
-                }
-                ?>
                 <div class="col-3 cajax text-center">
                     <div class="inptt" align="left">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
@@ -41,7 +32,7 @@
 
                             <input type="text" class="border-0 form-control cantidad_item"
                                 id="cantidad<?php echo $producto->producto_id; ?>" placeholder=""
-                                value="<?php echo $carrito['cantidad']; ?>" min="0" max="<?php echo $max; ?>" disabled>
+                                value="<?php echo $carrito['cantidad']; ?>" min="0" disabled>
 
                             <button class="btn btn-outline-secondary btn-plus" data-id="<?php echo $producto->producto_id; ?>"
                                 type="button" id="button-addon1"><i class="fas fa-plus"></i></button>

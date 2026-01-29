@@ -247,7 +247,7 @@ class Administracion_productosController extends Administracion_mainController
 		$data['producto_descripcion'] = $this->_getSanitizedParamHtml("producto_descripcion");
 		$data['producto_imagen'] = "";
 		$data['producto_destacado'] = $this->_getSanitizedParam("producto_destacado");
-		$data['producto_precio'] = $this->_getSanitizedParam("producto_precio");
+		$data['producto_precio'] = preg_replace('/[^\d]/', '', $this->_getSanitizedParam("producto_precio"));
 		$data['producto_nuevo'] = $this->_getSanitizedParam("producto_nuevo");
 		$data['producto_cantidad'] = $this->_getSanitizedParam("producto_cantidad");
 		$data['producto_categoria'] = $this->_getSanitizedParam("producto_categoria");

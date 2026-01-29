@@ -38,17 +38,15 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text input-icono  "><i class="far fa-list-alt"></i></span>
 							</div>
-							<select class="form-control" name="categoria_padre" >
+							<select class="form-control" name="categoria_padre">
 								<option value="">Seleccione...</option>
 								<?php foreach ($this->list_categoria_padre as $key => $value) { ?>
 									<option <?php if ($this->getObjectVariable($this->content, "categoria_padre") == $key) {
 										echo "selected";
-									} ?> 
-									
-									<?php if ($key == $this->padre) {
-										echo "selected";
-									} ?>
-									value="<?php echo $key; ?>" /> <?= $value; ?></option>
+									} ?> 		<?php if ($key == $this->padre) {
+													echo "selected";
+												} ?> value="<?php echo $key; ?>" /> <?= $value; ?>
+									</option>
 								<?php } ?>
 							</select>
 						</label>
@@ -68,6 +66,17 @@
 										class="glyphicon glyphicon-remove"></i> Eliminar Imagen</button></div>
 						</div>
 					<?php } ?>
+				</div>
+				<div class="col-4 form-group">
+					<label for="categoria_icono" class="control-label"><i class="fa-solid fa-taco"></i>Ícono</label>
+					<label class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text input-icono "><i class="fas fa-pencil-alt"></i></span>
+						</div>
+						<input type="text" value="<?php echo htmlspecialchars($this->content->categoria_icono); ?>"
+							name="categoria_icono" id="categoria_icono" class="form-control">
+					</label>
+					<div class="help-block with-errors"></div>
 				</div>
 				<div class="col-12 form-group">
 					<label for="categoria_descripcion" class="form-label">Descripci&oacute;n</label>

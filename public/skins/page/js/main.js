@@ -123,11 +123,15 @@ $(document).ready(function () {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((data) => {
-        mostrarNotificacion("Producto agregado al carrito", "success");
-        traercarrito();
-        actualizarContadorCarrito();
+        if (data.success) {
+          mostrarNotificacion("Producto agregado al carrito", "success");
+          traercarrito();
+          actualizarContadorCarrito();
+        } else {
+          mostrarNotificacion(data.message, "error");
+        }
       })
       .catch((error) => {
         console.error("Error al agregar al carrito:", error);
@@ -295,20 +299,22 @@ $(document).ready(function () {
   $(document).on("click", ".btn-plus", function () {
     const productoId = $(this).data("id");
     const input = $(`#cantidad${productoId}`);
-    let cantidad = parseInt(input.val()) || 0;
+    let oldVal = input.val();
+    let cantidad = parseInt(oldVal) || 0;
     cantidad++;
     input.val(cantidad);
-    cambiarCantidad(productoId, cantidad);
+    cambiarCantidad(productoId, cantidad, input, oldVal);
   });
 
   $(document).on("click", ".btn-minus", function () {
     const productoId = $(this).data("id");
     const input = $(`#cantidad${productoId}`);
-    let cantidad = parseInt(input.val()) || 0;
+    let oldVal = input.val();
+    let cantidad = parseInt(oldVal) || 0;
     if (cantidad > 1) {
       cantidad--;
       input.val(cantidad);
-      cambiarCantidad(productoId, cantidad);
+      cambiarCantidad(productoId, cantidad, input, oldVal);
     } else if (cantidad === 1) {
       eliminarDelCarrito(productoId);
     }
@@ -342,7 +348,7 @@ $(document).ready(function () {
   }
 
   // Función para cambiar cantidad
-  function cambiarCantidad(productoId, cantidad) {
+  function cambiarCantidad(productoId, cantidad, inputElement, oldVal) {
     const formData = new FormData();
     formData.append("producto", productoId);
     formData.append("cantidad", cantidad);
@@ -351,19 +357,25 @@ $(document).ready(function () {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((data) => {
-        traercarrito(0);
-        actualizarContadorCarrito();
-        // Actualizar modal si está abierto
-        if ($("#carrito-modal").hasClass("show")) {
-          $.get("/page/carrito", function (data) {
-            $("#carrito-modal .modal-body").html(data);
-          });
+        if (data.success) {
+          traercarrito(0);
+          actualizarContadorCarrito();
+          if ($("#carrito-modal").hasClass("show")) {
+            $.get("/page/carrito", function (data) {
+              $("#carrito-modal .modal-body").html(data);
+            });
+          }
+        } else {
+          inputElement.val(oldVal);
+          mostrarNotificacion(data.message, "error");
         }
       })
       .catch((error) => {
         console.error("Error al cambiar cantidad:", error);
+        inputElement.val(oldVal);
+        mostrarNotificacion("Error al cambiar la cantidad", "error");
       });
   }
 

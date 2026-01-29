@@ -11,7 +11,7 @@ class Page_productosController extends Page_mainController
   {
 
     $categoriasModel = new Administracion_Model_DbTable_Categorias();
-    $categorias = $categoriasModel->getList('categoria_estado = 1', 'categoria_nombre ASC');
+    $categorias = $categoriasModel->getList('categoria_estado = 1', 'orden ASC');
 
     $categoriasPadre = [];
     $subcategoriasPorPadre = [];
@@ -44,19 +44,19 @@ class Page_productosController extends Page_mainController
     $socio = Session::getInstance()->get('socio');
     $this->_view->socio = $socio;
     $productosModel = new Administracion_Model_DbTable_Productos();
-    $impuestosModel = new Administracion_Model_DbTable_Impuestos();
-    $impuestos = $impuestosModel->getList('impuesto_estado = 1', 'impuesto_nombre ASC');
+    // $impuestosModel = new Administracion_Model_DbTable_Impuestos();
+    // $impuestos = $impuestosModel->getList('impuesto_estado = 1', 'impuesto_nombre ASC');
 
-    $porcentajeImpuesto = 0;
-    if (is_countable($impuestos) && count($impuestos) > 0) {
-      foreach ($impuestos as $impuesto) {
-        $porcentajeImpuesto += $impuesto->impuesto_porcentaje;
-      }
-    }
+    // $porcentajeImpuesto = 0;
+    // if (is_countable($impuestos) && count($impuestos) > 0) {
+    //   foreach ($impuestos as $impuesto) {
+    //     $porcentajeImpuesto += $impuesto->impuesto_porcentaje;
+    //   }
+    // }
 
 
 
-    $productos = $productosModel->getList('producto_estado = 1', 'producto_destacado DESC, producto_nuevo DESC, producto_nombre ASC');
+    $productos = $productosModel->getList('producto_estado = 1 AND producto_cantidad > 0', 'producto_destacado DESC, producto_nuevo DESC, producto_nombre ASC');
 
     $categoriaId = $this->_getSanitizedParam('categoria');
     $subCategoriaId = $this->_getSanitizedParam('subcategoria');
@@ -84,18 +84,18 @@ class Page_productosController extends Page_mainController
 
     $categoriaInfo = $categoriasModel->getById($categoriaId);
     if ($categoriaInfo) {
-      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' ", $orden);
+      $productos = $productosModel->getList("producto_estado = 1 AND producto_categoria = '{$categoriaId}' AND producto_cantidad > 0", $orden);
       $this->_view->selectedCategoryId = (int) $categoriaId;
       $this->_view->categoriaInfo = $categoriaInfo;
     }
     if ($subCategoriaId) {
-      $productos = $productosModel->getList("producto_estado = 1 AND producto_subcategoria = '{$subCategoriaId}' ", $orden);
+      $productos = $productosModel->getList("producto_estado = 1 AND producto_subcategoria = '{$subCategoriaId}' AND producto_cantidad > 0", $orden);
       $this->_view->selectedCategoryId = (int) $categoriaId;
     }
 
     // Si no hay categoria ni subcategoria, aplicar orden a todos
     if (!$categoriaId && !$subCategoriaId) {
-      $productos = $productosModel->getList('producto_estado = 1', $orden);
+      $productos = $productosModel->getList('producto_estado = 1 AND producto_cantidad > 0', $orden);
     }
 
     $this->_view->selectedOrden = $ordenParam;
@@ -109,7 +109,7 @@ class Page_productosController extends Page_mainController
         $producto->producto_imagen = 'product.gif';
       }
 
-      $producto->producto_precio = $producto->producto_precio + ($producto->producto_precio * ($porcentajeImpuesto / 100));
+      // $producto->producto_precio = $producto->producto_precio + ($producto->producto_precio * ($porcentajeImpuesto / 100));
 
 
     }

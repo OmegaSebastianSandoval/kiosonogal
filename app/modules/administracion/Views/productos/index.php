@@ -166,9 +166,9 @@
 						<td>Precio</td>
 						<td>Cantidad</td>
 						<td>Categoria</td>
-						<td>Subcategoria</td>
+						<!-- <td>Subcategoria</td> -->
 						<td>Activo</td>
-						<td>C&oacute;digo</td>
+						<!-- <td>C&oacute;digo</td> -->
 						<td>Destacado</td>
 						<td width="100">Orden</td>
 						<td width="100"></td>
@@ -187,10 +187,10 @@
 							</td>
 							<td><?= $content->producto_precio; ?></td>
 							<td><?= $content->producto_cantidad; ?></td>
-							<td><?= $this->list_producto_categoria[$content->producto_categoria]; ?>
-							<td><?= $this->list_producto_subcategoria[$content->producto_subcategoria]; ?>
+							<td><?= $this->list_producto_categoria[$content->producto_categoria]; ?></td>
+							<!-- <td><?= $this->list_producto_subcategoria[$content->producto_subcategoria]; ?></td> -->
 							<td><?= $content->producto_estado == 1 ? 'Activo' : 'Inactivo'; ?></td>
-							<td><?= $content->producto_codigo; ?></td>
+							<!-- <td><?= $content->producto_codigo; ?></td> -->
 							<td><?= $content->producto_destacado == 1 ? 'Destacado' : ''; ?></td>
 							<td>
 								<input type="hidden" id="<?= $id; ?>" value="<?= $content->orden; ?>"></input>

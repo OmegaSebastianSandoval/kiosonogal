@@ -131,8 +131,8 @@
 							<td class="text-end">
 								<div>
 									<?php if ($content->categoria_padre == 0 || !$content->categoria_padre) { ?>
-										<a class="btn btn-rosado btn-sm" href="<?php echo $this->route; ?>/?padre=<?= $id ?>"
-											data-bs-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-plus"></i></a>
+										<!-- <a class="btn btn-rosado btn-sm" href="<?php echo $this->route; ?>/?padre=<?= $id ?>"
+											data-bs-toggle="tooltip" data-placement="top" title="Subcategorias"><i class="fas fa-plus"></i></a> -->
 									<?php } ?>
 
 									<a class="btn btn-azul btn-sm"

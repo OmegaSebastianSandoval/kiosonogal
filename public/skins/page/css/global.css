@@ -359,6 +359,7 @@ body.dark .nav-icon {
 
 .nav-label {
   font-size: 0.625rem;
+  text-align: center;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1883,4 +1884,33 @@ body.dark .modal-content {
   width: 100%;
 
 
+}
+
+.new-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(90deg, #5a7fb8 0%, #2C5483 50%, #5a7fb8 100%);
+  background-size: 200% 100%;
+  color: white;
+  width: 8rem;
+  height: 2.5rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(44, 84, 131, 0.5), 0 0 20px rgba(44, 84, 131, 0.3);
+  animation: shine 1.5s infinite linear;
+  display: grid;
+  place-items: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.577);
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
