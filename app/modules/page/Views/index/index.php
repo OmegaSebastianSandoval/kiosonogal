@@ -70,5 +70,9 @@
       background-image: url(/images/<?= $this->fondoHome->publicidad_imagen; ?>);
     }
 
+  <?php else: ?>
+    .home-page {
+      background-image: url(/skins/page/images/home.jpg);
+    }
   <?php endif; ?>
 </style>

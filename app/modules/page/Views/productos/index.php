@@ -39,40 +39,49 @@
   </aside>
 
   <main class="main-content">
-    <?php if (!$this->socio || !$this->socio->SBE_CODI): ?>
-
-      <div class="login-container">
-        <h4 class="login-title">BIENVENIDO</h4>
-        <form id="formCarnet" class="login-form">
-          <input type="hidden" name="hash" value="<?php echo $this->_view->securityHash; ?>">
-          <div class="form-group">
-            <label for="numeroCarnet" class="form-label">Número de carnet</label>
-            <div class="input-button-container">
-              <input type="number" class="keyboard-input form-control login-input" id="numeroCarnet" name="numeroCarnet"
-                placeholder="Ej. 12345678" data-kioskboard-type="numpad">
-              <button class="totem-btn totem-btn-primary submit-btn" type="submit"><i
-                  class="fa fa-arrow-right"></i></button>
-            </div>
-          </div>
-          <input type="hidden" name="hash" value="<?= $this->securityHash ?>">
-        </form>
-      </div>
-    <?php else: ?>
-      <div class="container-info">
-        <h4>Hola, <span><?php echo ($this->socio->sbe_nomb . " " . $this->socio->sbe_apel); ?></span></h4>
-      </div>
-    <?php endif; ?>
-
     <!-- Header -->
-    <header class="header">
-      <div class="header-content">
-        <div>
-          <p class="header-subtitle">Nuestra selección</p>
-          <h2 class="header-title">
-            <?php echo $this->categoriaInfo ? ($this->categoriaInfo->categoria_nombre) : "Todos los productos"; ?>
-          </h2>
+    <header class="header d-flex align-items-center justify-content-between">
+      <div>
+        <?php if (!$this->socio || !$this->socio->SBE_CODI): ?>
+
+          <div class="login-container">
+            <h4 class="login-title">BIENVENIDO</h4>
+            <form id="formCarnet" class="login-form">
+              <input type="hidden" name="hash" value="<?php echo $this->_view->securityHash; ?>">
+              <div class="form-group">
+                <label for="numeroCarnet" class="form-label">Número de carnet</label>
+                <div class="input-button-container">
+                  <input type="number" class="keyboard-input form-control login-input" id="numeroCarnet"
+                    name="numeroCarnet" placeholder="Ej. 12345678" data-kioskboard-type="numpad">
+                  <button class="totem-btn totem-btn-primary submit-btn" type="submit"><i
+                      class="fa fa-arrow-right"></i></button>
+                </div>
+              </div>
+              <input type="hidden" name="hash" value="<?= $this->securityHash ?>">
+            </form>
+          </div>
+        <?php else: ?>
+          <div class="container-info p-0">
+            <h4>Bienvenido, <span><?php echo ($this->socio->sbe_nomb . " " . $this->socio->sbe_apel); ?></span></h4>
+          </div>
+        <?php endif; ?>
+
+
+        <div class="header-content">
+          <div>
+            <p class="header-subtitle">Nuestra selección</p>
+            <h2 class="header-title">
+              <?php echo $this->categoriaInfo ? ($this->categoriaInfo->categoria_nombre) : "Todos los productos"; ?>
+            </h2>
+          </div>
+
         </div>
-        <div class="dropdown">
+      </div>
+      <img src="/skins/page/images/logo-hd.png" alt="Logo club el nogal" style="height: 100px;" class="">
+      <div class="h-100 d-flex flex-column justify-content-between align-items-end gap-3">
+        <!-- <div class="d-flex align-items-center gap-2 h-100" >
+        </div> -->
+        <div class="dropdown mt-auto">
           <button class="filter-button dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
             aria-expanded="false">
             <span class="material-symbols-outlined"><i class="fa-solid fa-filter"></i></span>
@@ -97,6 +106,7 @@
           </ul>
         </div>
       </div>
+
     </header>
 
     <!-- Scrollable Grid Area -->
@@ -146,15 +156,22 @@
                     alt="<?php echo ($producto->producto_nombre); ?>">
                   <h3><?php echo ($producto->producto_nombre); ?></h3>
                   <div><?php echo ($producto->producto_descripcion); ?></div>
-                  <div class="d-flex justify-content-between align-items-center mt-3">
+                  <div class="d-flex justify-content-between align-items-center mt-3 gap-2">
 
                     <p class="price">$<?php echo number_format((float) $producto->producto_precio, 0); ?></p>
                     <?php if ($this->socio && $this->socio->SBE_CODI): ?>
                       <button type="button" class="btn-agregar-carrito"
                         data-producto="<?php echo (int) $producto->producto_id; ?>" data-cantidad="1">Agregar al
                         carrito</button>
-                    <?php endif; ?>
+                    <?php else: ?>
+                      <div class="alert alert-light mb-0" role="alert">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="fs-6">
 
+                          Para agregar productos al carrito, por favor inicia sesión. </span>
+                      </div>
+
+                    <?php endif; ?>
                   </div>
                   <!-- <p class="code">Código: <?php
                   // echo ($producto->producto_codigo); 
@@ -212,7 +229,52 @@
     </div>
   </div>
 <?php endif; ?>
-
+<?php if ($this->popup->publicidad_estado == 1 && $_GET['popup'] == 1) { ?>
+  <? ?>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const popup = document.getElementById("popup");
+      if (popup) {
+        const modal = new bootstrap.Modal(popup);
+        modal.show();
+      }
+    });
+  </script>
+<?php } ?>
+<!-- Modal PopUp -->
+<?php if ($this->popup->publicidad_estado == 1 && $_GET['popup'] == 1) { ?>
+  <div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style=" border: none;
+    background-color: transparent;">
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"
+          style="filter: invert(1);"></button>
+        <div class="modal-body">
+          <?php if ($this->popup->publicidad_video != "") { ?>
+            <div class="fondo-video-youtube">
+              <div class="banner-video-youtube" id="videobanner<?php echo $this->popup->publicidad_id; ?> "
+                data-video="<?php echo $this->id_youtube($this->popup->publicidad_video); ?>"></div>
+            </div>
+          <?php } ?>
+          <?php if ($this->popup->publicidad_imagen != "") { ?>
+            <?php if ($this->popup->publicidad_enlace != "") { ?> <a href="<?php echo $this->popup->publicidad_enlace ?>"
+                <?php if ($this->popup->publicidad_tipo_enlace == 1) {
+                  echo "target='_blank'";
+                } ?>> <?php } ?><img
+                class="w-100 img-fluid d-none d-md-block img-popup"
+                src="/images/<?php echo $this->popup->publicidad_imagen ?>"
+                alt="Imagen PopUp <?= $this->popup->publicidad_nombre ?>">
+              <img class="w-100 img-fluid d-block d-md-none" src="/images/<?php echo $this->popup->publicidad_imagen ?>"
+                alt="Imagen PopUp <?= $this->popup->publicidad_nombre ?>">
+              <?php if ($this->popup->publicidad_enlace != "") { ?>
+              </a>
+            <?php } ?>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const productGrid = document.querySelector('.product-grid');

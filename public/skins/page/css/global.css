@@ -827,7 +827,7 @@ body.dark .modal-content {
   font-size: 2.3rem;
   font-weight: 700;
   color: var(--azul);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .modal-product .code {
@@ -1443,7 +1443,7 @@ body.dark .modal-content {
 
 .contenedor-resumen .table td {
   border: none;
-  padding:1.1rem;
+  padding: 1.1rem;
   vertical-align: middle;
   color: var(--grisoscuro);
   font-size: 1.2rem;
@@ -1536,7 +1536,7 @@ body.dark .modal-content {
   justify-content: center;
   /* align-items: center; */
   /* height: 100%; */
-  padding: 2rem;
+  /* padding: 2rem; */
   padding-bottom: 0;
 }
 
@@ -1864,6 +1864,23 @@ body.dark .modal-content {
   font-size: 2rem;
 }
 
-#countdown-text{
-  font-size:1.2rem;
+#countdown-text {
+  font-size: 1.2rem;
+}
+
+.contenedor-logo-carrito {
+  height: 100%;
+  margin: auto;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.contenedor-logo-carrito img {
+  max-width: 450px;
+  display: block;
+  margin: auto;
+  width: 100%;
+
+
 }

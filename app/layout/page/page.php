@@ -24,7 +24,7 @@
   <!-- KioskBoard CSS -->
   <link rel="stylesheet" href="/components/keyboard/kioskboard-2.3.0.min.css">
 
-  <link rel="shortcut icon" href="/images/<?= $infopage->info_pagina_favicon; ?>">
+  <link rel="shortcut icon" href="/favicon.ico">
 
 
   <script type="text/javascript" id="www-widgetapi-script"

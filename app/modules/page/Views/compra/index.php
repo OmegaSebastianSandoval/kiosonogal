@@ -4,7 +4,9 @@
     <h2 class="titulo-carrito">Pagar compra</h2>
   </div>
   <div class="container fondo-carrito compra-container">
-
+    <div class="contenedor-logo-carrito" align="center">
+      <img src="/skins/page/images/logo-hd.png" alt="">
+    </div>
     <?php $valortotal = 0; ?>
     <?php if (count($this->carrito) > 0) { ?>
       <?php foreach ($this->carrito as $key => $carrito) { ?>
@@ -37,7 +39,7 @@
 
                   <h5 class="payment-title">Cargo a la acción</h5>
                   <p class="payment-description">Paga directamente desde tu cuenta asociada</p>
-                  
+
                 </div>
                 <div class="payment-icon">
                   <i class="fas fa-money-bill-wave"></i>
@@ -68,7 +70,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modalCargo" tabindex="-1" aria-labelledby="modalCargoLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalCargoLabel">Confirmar pago con cargo a la acción</h5>
@@ -106,7 +108,8 @@
 
               <div class="mb-3">
                 <label for="lugar">Selecciona el lugar en el que se encuentra (1 a 16):</label>
-                <input type="number" id="lugar" name="lugar" class="keyboard-input form-control" min="1" max="16" required data-kioskboard-type="numpad">
+                <input type="number" id="lugar" name="lugar" class="keyboard-input form-control" min="1" max="16" required
+                  data-kioskboard-type="numpad">
               </div>
               <div id="errorMessages" class="alert alert-danger mt-3" style="display:none;"></div>
               <div class="modal-footer d-flex gap-3">
@@ -173,6 +176,6 @@
   .compra-container {
     height: 90dvh;
     display: grid;
-    place-items: center;
+    /* place-items: center; */
   }
 </style>
