@@ -98,8 +98,8 @@
             </tbody>
             <tfoot class="table-light">
               <tr>
-                <th colspan="3" class="text-end fw-bold">Total a Pagar:</th>
-                <th class="text-center fw-bold fs-5 text-success">$<?php echo number_format($total, 0, ',', '.'); ?>
+                <th colspan="3" class="text-end fw-bold">Total pagado</th>
+                <th class="text-center fw-bold  text-success">$<?php echo number_format($total, 0, ',', '.'); ?>
                 </th>
               </tr>
             </tfoot>
@@ -120,19 +120,18 @@
     const countdownText = document.getElementById('countdown-text');
     let countdown = 30;
 
-    // Mostrar el mensaje
     redirectMessage.style.display = 'block';
 
-    // const interval = setInterval(() => {
-    //   countdown--;
+    const interval = setInterval(() => {
+      countdown--;
 
-    //   countdownText.textContent = `Volviendo al inicio en ${countdown} segundos`;
+      countdownText.textContent = `Volviendo al inicio en ${countdown} segundos`;
 
-    //   if (countdown <= 0) {
-    //     clearInterval(interval);
-    //     window.location.href = '/page/index/logout';
-    //   }
-    // }, 1000);
+      if (countdown <= 0) {
+        clearInterval(interval);
+        window.location.href = '/page/index/logout';
+      }
+    }, 1000);
   });
 
 </script>
@@ -141,10 +140,12 @@
   header {
     display: none;
   }
-  .min-h-auto{
+
+  .min-h-auto {
     min-height: auto !important;
   }
-  .contenedor-resumen{
+
+  .contenedor-resumen {
     height: 100dvh;
     display: grid;
     place-items: center;
