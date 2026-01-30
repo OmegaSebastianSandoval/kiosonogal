@@ -204,6 +204,7 @@ class Page_pagarController extends Page_mainController
 
   public function procesardatafonoAction()
   {
+    $this->setLayout('blanco');
     $pedidoId = $this->_getSanitizedParam('pedido');
     if (!$pedidoId) {
       echo json_encode([
@@ -248,16 +249,14 @@ class Page_pagarController extends Page_mainController
     $transaccion = $pedidoId;        // el ID completo
 
     $tefData = [
-      '40' => $this->pad($total, 12),          // Valor total
-      '41' => $this->pad($iva, 12),            // IVA
-      '42' => $this->pad($kioskoID, 8),   // Número de caja
-      '43' => $this->pad($recibo, 6), // Recibo
-      '53' => $transaccion,    // ID transacción
+      'amount' => $total,
+      'terminalId' => $kioskoID,
+      'cashierId' => $kioskoID,
+      'transactionId' => $transaccion,    // ID transacción
     ];
-
     $payload = json_encode($tefData);
 
-    $ch = curl_init('http://127.0.0.1:3001/tef/compra');
+    $ch = curl_init('http://localhost:3000/api/purchase');
     curl_setopt_array($ch, [
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_POST => true,
@@ -277,15 +276,37 @@ class Page_pagarController extends Page_mainController
 
     curl_close($ch);
     $resultado = json_decode($response, true);
+    /*
+    {
+      "status": "ok",
+      "message": "Transacción aprobada",
+      "data": {
+        "success": true,
+        "authCode": "MOCK662734",
+        "responseCode": "00",
+        "amount": "000000100000",
+        "transactionId": "MAC_TEST",
+        "terminalId": "MAC01",
+        "cashierId": "MAC_USER",
+        "franchise": "VISA",
+        "accountType": "CR",
+        "last4": "1234",
+        "maskedPan": "400558******1234",
+        "receiptNumber": "617977"
+      }
+    }
+    */
+    if (isset($resultado['status']) && ($resultado['status'] === 'approved' || $resultado['status'] === 'ok')) {
 
-    if (isset($resultado['status']) && $resultado['status'] === 'approved') {
+      $dataResultado = $resultado['data'] ?? [];
       // Actualizar pedido como pagado
-      $this->actualizarEstadoPedido(
+      $pedidoModel->actualizarEstadoPedido(
         $pedidoId,
         2, // estado pagado
         'Pago aprobado por datáfono',
         'El pago fue aprobado exitosamente',
         1, // estado preparación pendiente
+        print_r($resultado, true)
       );
 
       // Descontar inventario
@@ -296,13 +317,16 @@ class Page_pagarController extends Page_mainController
         'msg' => 'Pago exitoso',
         'status' => 'approved'
       ]);
+      return;
     } else {
       // Pago rechazado
-      $this->actualizarEstadoPedido(
+      $pedidoModel->actualizarEstadoPedido(
         $pedidoId,
         3, // estado rechazado
         'Pago rechazado',
-        'El pago fue rechazado por el banco'
+        'El pago fue rechazado por el banco',
+        9,
+        print_r($resultado, true)
       );
 
       echo json_encode([
@@ -310,8 +334,10 @@ class Page_pagarController extends Page_mainController
         'msg' => $resultado['msg'] ?? 'Pago rechazado',
         'status' => 'rejected'
       ]);
+      return;
     }
-    echo json_encode($resultado);
+    // echo json_encode($resultado);
+
   }
   function pad($value, $length)
   {
@@ -394,26 +420,5 @@ class Page_pagarController extends Page_mainController
       }
     }
   }
-  private function actualizarEstadoPedido($pedidoId, $estado, $mensaje1, $mensaje2, $estadoPreparacion = null)
-  {
-    $pedidoModel = new Administracion_Model_DbTable_Pedidos();
-    $data = [
-      'pedido_estado' => $estado,
-      'pedido_estado_texto' => $mensaje1,
-      'pedido_estado_texto2' => $mensaje2,
-    ];
 
-    if ($estadoPreparacion !== null) {
-      $data['pedido_estado_preparacion'] = $estadoPreparacion;
-      $data['pedido_estado_preparacion_text'] = ($estadoPreparacion == 1) ? 'Pendiente de preparación' : 'En preparación';
-    }
-
-    $pedidoModel->editField($pedidoId, 'pedido_estado', $estado);
-    $pedidoModel->editField($pedidoId, 'pedido_estado_texto', $mensaje1);
-    $pedidoModel->editField($pedidoId, 'pedido_estado_texto2', $mensaje2);
-    if ($estadoPreparacion !== null) {
-      $pedidoModel->editField($pedidoId, 'pedido_estado_preparacion', $estadoPreparacion);
-      $pedidoModel->editField($pedidoId, 'pedido_estado_preparacion_text', ($estadoPreparacion == 1) ? 'Pendiente de preparación' : 'En preparación');
-    }
-  }
 }

@@ -96,4 +96,11 @@ class Administracion_Model_DbTable_Pedidos extends Db_Table
 		$query = "UPDATE pedidos SET  pedido_documento = '$pedido_documento', pedido_nombre = '$pedido_nombre', pedido_correo = '$pedido_correo', pedido_celular = '$pedido_celular', pedido_propina = '$pedido_propina', pedido_fecha = '$pedido_fecha', pedido_valorpagar = '$pedido_valorpagar', pedido_estado = '$pedido_estado', pedido_estado_texto = '$pedido_estado_texto', pedido_estado_texto2 = '$pedido_estado_texto2', pedido_cus = '$pedido_cus', pedido_franquicia = '$pedido_franquicia', pedido_medio = '$pedido_medio', pedido_nombrefe = '$pedido_nombrefe', pedido_correofe = '$pedido_correofe', pedido_celularfe = '$pedido_celularfe', pedido_cuotas = '$pedido_cuotas', pedido_request_id = '$pedido_request_id', pedido_ip = '$pedido_ip', pedido_numeroaccion = '$pedido_numeroaccion', pedido_observacion = '$pedido_observacion', pedido_lugar = '$pedido_lugar', pedido_estado_preparacion = '$pedido_estado_preparacion', pedido_estado_preparacion_text = '$pedido_estado_preparacion_text', pedido_kiosko = '$pedido_kiosko', pedido_iva = '$pedido_iva', pedido_impuestos = '$pedido_impuestos' WHERE pedido_id = '" . $id . "'";
 		$res = $this->_conn->query($query);
 	}
+
+
+	public function actualizarEstadoPedido($pedidoId, $estado, $mensaje1, $mensaje2, $estadoPreparacion, $respuestaDatadono)
+	{
+		$query = "UPDATE pedidos SET  pedido_estado = '$estado', pedido_estado_texto = '$mensaje1', pedido_estado_texto2 = '$mensaje2', pedido_estado_preparacion = '$estadoPreparacion', pedido_res_datafono = '$respuestaDatadono' WHERE pedido_id = '" . $pedidoId . "'";
+		$res = $this->_conn->query($query);
+	}
 }

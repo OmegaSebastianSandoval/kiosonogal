@@ -147,7 +147,7 @@
 </div>
 
 
-<!--
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const pedidoId = '<?php echo $this->pedidoId; ?>';
@@ -219,12 +219,12 @@
             setPaymentState('error', 'Error de conexión. Intente nuevamente.');
             
             // Opcional: Intentar nuevamente después de un tiempo
-            setTimeout(() => {
-                secondaryMessage.textContent = 'Reintentando en 5 segundos...';
-                setTimeout(() => {
-                    location.reload();
-                }, 5000);
-            }, 2000);
+            // setTimeout(() => {
+            //     secondaryMessage.textContent = 'Reintentando en 5 segundos...';
+            //     setTimeout(() => {
+            //         location.reload();
+            //     }, 5000);
+            // }, 2000);
         });
 
         // Timeout de seguridad (si no hay respuesta en 1800 segundos)
@@ -236,4 +236,4 @@
         }, 1800000);
     });
 </script>
-    -->
+   
