@@ -35,7 +35,6 @@ class Page_compraController extends Page_mainController
       }
 
 
-      $productoInfo->producto_precio += $productoInfo->producto_precio * ($porcentajeImpuesto / 100);
 
       $precioUnitario = isset($productoInfo->producto_precio) ? (float) $productoInfo->producto_precio : 0;
       $lineTotal = $precioUnitario * (int) $cantidad;

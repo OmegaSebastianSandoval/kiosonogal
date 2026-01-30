@@ -46,7 +46,7 @@
                 </div>
               </button>
             <?php } ?>
-            <button type="button" class="payment-card datafono">
+            <a href="/page/pagar/datafono" type="button" class="payment-card datafono text-decoration-none">
               <div>
                 <h5 class="payment-title">Datáfono</h5>
                 <p class="payment-description">Pago con tarjeta física</p>
@@ -55,7 +55,7 @@
               <div class="payment-icon">
                 <i class="fas fa-credit-card"></i>
               </div>
-            </button>
+            </a>
 
           </div>
           <a href="/page/productos" class="btn btn-sm btn-seguir btn-outline-secondary max-w-100">

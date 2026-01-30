@@ -1,7 +1,7 @@
-<?php 
+<?php
 /**
-* clase que genera la insercion y edicion  de pedidos en la base de datos
-*/
+ * clase que genera la insercion y edicion  de pedidos en la base de datos
+ */
 class Administracion_Model_DbTable_Pedidos extends Db_Table
 {
 	/**
@@ -21,7 +21,8 @@ class Administracion_Model_DbTable_Pedidos extends Db_Table
 	 * @param  array Array array con la informacion con la cual se va a realizar la insercion en la base de datos
 	 * @return integer      identificador del  registro que se inserto
 	 */
-	public function insert($data){
+	public function insert($data)
+	{
 		$pedido_documento = $data['pedido_documento'];
 		$pedido_nombre = $data['pedido_nombre'];
 		$pedido_correo = $data['pedido_correo'];
@@ -47,10 +48,12 @@ class Administracion_Model_DbTable_Pedidos extends Db_Table
 		$pedido_estado_preparacion = $data['pedido_estado_preparacion'];
 		$pedido_estado_preparacion_text = $data['pedido_estado_preparacion_text'];
 		$pedido_kiosko = $data['pedido_kiosko'];
+		$pedido_iva = $data['pedido_iva'];
+		$pedido_impuestos = $data['pedido_impuestos'];
 
-		$query = "INSERT INTO pedidos( pedido_documento, pedido_nombre, pedido_correo, pedido_celular, pedido_propina, pedido_fecha, pedido_valorpagar, pedido_estado, pedido_estado_texto, pedido_estado_texto2, pedido_cus, pedido_franquicia, pedido_medio, pedido_nombrefe, pedido_correofe, pedido_celularfe, pedido_cuotas, pedido_request_id, pedido_ip, pedido_numeroaccion, pedido_observacion, pedido_lugar, pedido_estado_preparacion, pedido_estado_preparacion_text, pedido_kiosko) VALUES ( '$pedido_documento', '$pedido_nombre', '$pedido_correo', '$pedido_celular', '$pedido_propina', '$pedido_fecha', '$pedido_valorpagar', '$pedido_estado', '$pedido_estado_texto', '$pedido_estado_texto2', '$pedido_cus', '$pedido_franquicia', '$pedido_medio', '$pedido_nombrefe', '$pedido_correofe', '$pedido_celularfe', '$pedido_cuotas', '$pedido_request_id', '$pedido_ip', '$pedido_numeroaccion', '$pedido_observacion', '$pedido_lugar', '$pedido_estado_preparacion', '$pedido_estado_preparacion_text', '$pedido_kiosko')";
+		$query = "INSERT INTO pedidos( pedido_documento, pedido_nombre, pedido_correo, pedido_celular, pedido_propina, pedido_fecha, pedido_valorpagar, pedido_estado, pedido_estado_texto, pedido_estado_texto2, pedido_cus, pedido_franquicia, pedido_medio, pedido_nombrefe, pedido_correofe, pedido_celularfe, pedido_cuotas, pedido_request_id, pedido_ip, pedido_numeroaccion, pedido_observacion, pedido_lugar, pedido_estado_preparacion, pedido_estado_preparacion_text, pedido_kiosko, pedido_iva, pedido_impuestos) VALUES ( '$pedido_documento', '$pedido_nombre', '$pedido_correo', '$pedido_celular', '$pedido_propina', '$pedido_fecha', '$pedido_valorpagar', '$pedido_estado', '$pedido_estado_texto', '$pedido_estado_texto2', '$pedido_cus', '$pedido_franquicia', '$pedido_medio', '$pedido_nombrefe', '$pedido_correofe', '$pedido_celularfe', '$pedido_cuotas', '$pedido_request_id', '$pedido_ip', '$pedido_numeroaccion', '$pedido_observacion', '$pedido_lugar', '$pedido_estado_preparacion', '$pedido_estado_preparacion_text', '$pedido_kiosko', '$pedido_iva', '$pedido_impuestos')";
 		$res = $this->_conn->query($query);
-        return mysqli_insert_id($this->_conn->getConnection());
+		return mysqli_insert_id($this->_conn->getConnection());
 	}
 
 	/**
@@ -59,8 +62,9 @@ class Administracion_Model_DbTable_Pedidos extends Db_Table
 	 * @param  integer    identificador al cual se le va a realizar la actualizacion
 	 * @return void
 	 */
-	public function update($data,$id){
-		
+	public function update($data, $id)
+	{
+
 		$pedido_documento = $data['pedido_documento'];
 		$pedido_nombre = $data['pedido_nombre'];
 		$pedido_correo = $data['pedido_correo'];
@@ -86,7 +90,10 @@ class Administracion_Model_DbTable_Pedidos extends Db_Table
 		$pedido_estado_preparacion = $data['pedido_estado_preparacion'];
 		$pedido_estado_preparacion_text = $data['pedido_estado_preparacion_text'];
 		$pedido_kiosko = $data['pedido_kiosko'];
-		$query = "UPDATE pedidos SET  pedido_documento = '$pedido_documento', pedido_nombre = '$pedido_nombre', pedido_correo = '$pedido_correo', pedido_celular = '$pedido_celular', pedido_propina = '$pedido_propina', pedido_fecha = '$pedido_fecha', pedido_valorpagar = '$pedido_valorpagar', pedido_estado = '$pedido_estado', pedido_estado_texto = '$pedido_estado_texto', pedido_estado_texto2 = '$pedido_estado_texto2', pedido_cus = '$pedido_cus', pedido_franquicia = '$pedido_franquicia', pedido_medio = '$pedido_medio', pedido_nombrefe = '$pedido_nombrefe', pedido_correofe = '$pedido_correofe', pedido_celularfe = '$pedido_celularfe', pedido_cuotas = '$pedido_cuotas', pedido_request_id = '$pedido_request_id', pedido_ip = '$pedido_ip', pedido_numeroaccion = '$pedido_numeroaccion', pedido_observacion = '$pedido_observacion', pedido_lugar = '$pedido_lugar', pedido_estado_preparacion = '$pedido_estado_preparacion', pedido_estado_preparacion_text = '$pedido_estado_preparacion_text', pedido_kiosko = '$pedido_kiosko' WHERE pedido_id = '".$id."'";
+		$pedido_iva = $data['pedido_iva'];
+		$pedido_impuestos = $data['pedido_impuestos'];
+
+		$query = "UPDATE pedidos SET  pedido_documento = '$pedido_documento', pedido_nombre = '$pedido_nombre', pedido_correo = '$pedido_correo', pedido_celular = '$pedido_celular', pedido_propina = '$pedido_propina', pedido_fecha = '$pedido_fecha', pedido_valorpagar = '$pedido_valorpagar', pedido_estado = '$pedido_estado', pedido_estado_texto = '$pedido_estado_texto', pedido_estado_texto2 = '$pedido_estado_texto2', pedido_cus = '$pedido_cus', pedido_franquicia = '$pedido_franquicia', pedido_medio = '$pedido_medio', pedido_nombrefe = '$pedido_nombrefe', pedido_correofe = '$pedido_correofe', pedido_celularfe = '$pedido_celularfe', pedido_cuotas = '$pedido_cuotas', pedido_request_id = '$pedido_request_id', pedido_ip = '$pedido_ip', pedido_numeroaccion = '$pedido_numeroaccion', pedido_observacion = '$pedido_observacion', pedido_lugar = '$pedido_lugar', pedido_estado_preparacion = '$pedido_estado_preparacion', pedido_estado_preparacion_text = '$pedido_estado_preparacion_text', pedido_kiosko = '$pedido_kiosko', pedido_iva = '$pedido_iva', pedido_impuestos = '$pedido_impuestos' WHERE pedido_id = '" . $id . "'";
 		$res = $this->_conn->query($query);
 	}
 }
